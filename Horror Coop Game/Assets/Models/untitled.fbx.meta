@@ -1,64 +1,14 @@
 fileFormatVersion: 2
-guid: 5518466ac73c3b94e8f1765c6c455927
+guid: 4c8e042309ecc164bb465e3b40d8f242
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
-    second: Object001
-  - first:
-      1: 100004
-    second: Object002
-  - first:
-      4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
-    second: Object001
-  - first:
-      4: 400004
-    second: Object002
-  - first:
-      21: 2100000
-    second: 13 - Default
-  - first:
-      23: 2300000
-    second: Object001
-  - first:
-      23: 2300002
-    second: Object002
-  - first:
-      33: 3300000
-    second: Object001
-  - first:
-      33: 3300002
-    second: Object002
-  - first:
-      43: 4300000
-    second: Object001
-  - first:
-      43: 4300002
-    second: Object002
-  - first:
-      74: 7400000
-    second: Take 001
-  - first:
-      95: 9500000
-    second: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 13 - Default
-    second: {fileID: 2100000, guid: 4d18fb2a1a823d749a60aef0052a3b14, type: 2}
+  internalIDToNameTable: []
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -80,40 +30,11 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      internalID: 7400000
-      firstFrame: 0
-      lastFrame: 100
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    isReadable: 1
+    clipAnimations: []
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.8
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -123,7 +44,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -160,13 +81,13 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0018000001
+    globalScale: 0.005
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
