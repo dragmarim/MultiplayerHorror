@@ -8,6 +8,6 @@ public class Clicked : MonoBehaviour
     public GameObject randomizeRuneOrder;
     
     void OnMouseDown() {
-		Debug.Log("MouseDown");
+        randomizeRuneOrder.GetComponent<Randomize>().NextNumber(runeID);
     }
 }
