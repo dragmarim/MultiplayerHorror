@@ -8,6 +8,7 @@ public class Randomize : MonoBehaviour
     public GameObject player;
     public GameObject userInterface;
     public GameObject menuCamera;
+    public GameObject crosshair;
     public GameObject randomSeedObject;
     public GameObject localPlayerObject;
     public GameObject playerCountObject;
@@ -15,13 +16,14 @@ public class Randomize : MonoBehaviour
     public int seed = 1;
     public int localPlayer = 1;
     public int playerCount = 1;
-    public List<int> playersAvailable = new List<int>();
+    List<int> playersAvailable = new List<int>();
     public List<int> playerOrder = new List<int>();
     List<int> runesAvailable = new List<int>();
-    List<int> runeOrder = new List<int>();
+    public List<int> runeOrder = new List<int>();
 
-    void Start()
-    {
+    public int currentSequenceIndex = 0;
+
+    void Start() {
         Random.InitState(seed);
 
         for (int i = 0; i < 8; i++) {
@@ -71,11 +73,25 @@ public class Randomize : MonoBehaviour
     }
 
     public void StartGame() {
-        seed = int.Parse(randomSeedObject.GetComponent<Text>().text);
+        if (randomSeedObject.GetComponent<Text>().text != "") {
+            seed = int.Parse(randomSeedObject.GetComponent<Text>().text);
+        } else {
+            seed = 1;
+        }
         localPlayer = (int)localPlayerObject.GetComponent<Slider>().value;
         playerCount = (int)playerCountObject.GetComponent<Slider>().value;
+        crosshair.SetActive(true);
         player.SetActive(true);
         userInterface.SetActive(false);
         menuCamera.SetActive(false);
+    }
+
+    public void NextNumber(int runeNumber) {
+        if (runeNumber == runeOrder[currentSequenceIndex]) {
+            Debug.Log("Success");
+            currentSequenceIndex += 1;
+        } else {
+            Debug.Log("Died");
+        }
     }
 }

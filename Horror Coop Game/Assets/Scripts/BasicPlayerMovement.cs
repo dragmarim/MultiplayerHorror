@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BasicPlayerMovement : MonoBehaviour
 {
+	public GameObject targetName;
 
 	public bool grounded;
 	public float speed;
@@ -21,17 +23,34 @@ public class BasicPlayerMovement : MonoBehaviour
 
 	public Animator anim;
 
-	void Start ()
-	{
+	void Start () {
 		isSprinting = false;
 		playerRigidbody = GetComponent <Rigidbody> ();
 		grounded = true;
 		transform.rotation = (Quaternion.identity);
 		anim = GetComponentInChildren<Animator> ();
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	void FixedUpdate ()
-	{
+	void Update() {
+		if (Input.GetKey(KeyCode.Escape)) {
+			Cursor.lockState = CursorLockMode.None;
+		}
+	}
+
+	void FixedUpdate () {
+		Ray ray = new Ray(cam.transform.position, cam.transform.forward * 3);
+        RaycastHit hit;
+		Debug.DrawRay(ray.origin, ray.direction * 3, Color.red);
+		if (Physics.Raycast (ray, out hit, 3)) {
+			if (hit.collider.tag == "Rune") {
+				targetName.GetComponent<Text>().text = hit.collider.name;
+			} else {
+				targetName.GetComponent<Text>().text = "";
+			}
+		} else {
+			targetName.GetComponent<Text>().text = "";
+		}
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A)) {
 			anim.SetBool ("Walking", true);
 			isWalking = true;
