@@ -1908,6 +1908,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: awdafesgr
       objectReference: {fileID: 0}
+    - target: {fileID: 4224801822505238522, guid: 6266eb1a444ed6342b935e32e1eae0c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6266eb1a444ed6342b935e32e1eae0c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1961,11 +1966,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6266eb1a444ed6342b935e32e1eae0c3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4224801822505238522, guid: 6266eb1a444ed6342b935e32e1eae0c3,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2447,6 +2447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9273a7f135a1a4fa7d3300cc2c0ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: 3
+  localPlayer: 1
+  playerCount: 3
+  playersAvailable: 
+  playerOrder: 
 --- !u!1001 &8516989736775668807
 PrefabInstance:
   m_ObjectHideFlags: 0
