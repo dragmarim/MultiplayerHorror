@@ -82,7 +82,7 @@ public class MaskMovement : MonoBehaviour
 
     IEnumerator DeathAnimation() {
         transform.LookAt(new Vector3(player.transform.position.x, 1.7f, player.transform.position.z));
-        transform.position = new Vector3(transform.position.x, 1.7f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 1.6f, transform.position.z);
         attackPlayer = true;
         Debug.Log(Vector3.Distance(transform.position, player.transform.position)/33);
         yield return new WaitForSeconds(Vector3.Distance(transform.position, player.transform.position)/33);
