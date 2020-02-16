@@ -189,6 +189,13 @@ public class BasicPlayerMovement : MonoBehaviour
 		}
 	}
 
+	public void DieFromMask(GameObject mask) {
+		isActive = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		GetComponent<MouseLook>().enabled = false;
+		cam.transform.LookAt(new Vector3(mask.transform.position.x, 0.7f, mask.transform.position.z));
+	}
+
 	IEnumerator Hiding() {
 		moveTowardsHiding = true;
 		cam.GetComponent<MouseLook>().enabled = false;
