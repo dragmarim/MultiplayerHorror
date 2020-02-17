@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class CrawlTowardHouse : MonoBehaviour
 {
+    public bool lightOn;
     bool climbUpOverHill;
     bool startClimbingDownHill;
     bool climbingDownHill;
+    bool runAway;
 
     void Start() {
         climbUpOverHill = false;
         startClimbingDownHill = false;
         climbingDownHill = false;
+        lightOn = false;
+        runAway = false;
         StartCoroutine(CrawlStart());
     }
 
@@ -24,13 +28,23 @@ public class CrawlTowardHouse : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(-76, 7.25f, -9.75f), 3 * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(5.5f, 85, 1.8f), 2 * Time.deltaTime);
         }
-        if (climbingDownHill) {
+        if (climbingDownHill && Vector3.Distance(new Vector3(-9.5f, 0.5f, -5), transform.position) > 0.1f && !lightOn) {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(-9.5f, 0.5f, -5), 4 * Time.deltaTime);
+        }
+        if (lightOn && Vector3.Distance(new Vector3(-9.5f, 0.5f, -5), transform.position) < 45) {
+            runAway = true;
+            climbingDownHill = false;
+            CrawlStart();
+        }
+        if (runAway) {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, -100), 30 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(5.5f, 175, 1.8f), 4 * Time.deltaTime);
         }
     }
 
     IEnumerator CrawlStart() {
         yield return new WaitForSeconds(2);
+        runAway = false;
         transform.position = new Vector3(-81, 6, -11);
         transform.rotation = Quaternion.Euler(-31, 74, 3);
         climbUpOverHill = true;
@@ -40,7 +54,5 @@ public class CrawlTowardHouse : MonoBehaviour
         yield return new WaitForSeconds(1);
         startClimbingDownHill = false;
         climbingDownHill = true;
-        yield return new WaitForSeconds(17);
-        climbingDownHill = false;
     }
 }
