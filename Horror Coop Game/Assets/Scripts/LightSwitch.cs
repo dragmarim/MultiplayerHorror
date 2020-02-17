@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LightSwitch : MonoBehaviour
 {
+    public AudioClip lightOnSound;
+    public AudioClip lightOffSound;
+    AudioSource audio;
+
     public GameObject roadKill;
     public GameObject button;
     public GameObject spotLight;
@@ -12,6 +16,7 @@ public class LightSwitch : MonoBehaviour
     bool flipBackDown;
     
     void Start() {
+        audio = GetComponent<AudioSource>();
         isSwitched = false;
     }
 
@@ -22,6 +27,8 @@ public class LightSwitch : MonoBehaviour
     }
 
     void TurnOff() {
+        audio.clip = lightOffSound;
+        audio.Play();
         button.transform.localPosition = new Vector3(0, 0, 0);
         button.transform.localRotation = Quaternion.Euler(0, 0, 0);
         spotLight.SetActive(false);
@@ -31,8 +38,9 @@ public class LightSwitch : MonoBehaviour
 
     void OnMouseOver() {
         if (Vector3.Distance(player.transform.position, transform.position) < 3.6f) {
-            Debug.Log("Here");
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButton(0) && !isSwitched) {
+                audio.clip = lightOnSound;
+                audio.Play();
                 Debug.Log("Worked");
                 button.transform.localPosition = new Vector3(0, 0, -0.02f);
                 button.transform.localRotation = Quaternion.Euler(-45, 0, 0);
@@ -40,12 +48,16 @@ public class LightSwitch : MonoBehaviour
                 roadKill.GetComponent<CrawlTowardHouse>().lightOn = true;
                 isSwitched = true;
             } else {
-                TurnOff();
+                if (!Input.GetMouseButton(0) && isSwitched) {
+                    TurnOff();
+                }
             }
         }
     }
 
     void OnMouseExit() {
-        TurnOff();
+        if (isSwitched) {
+            TurnOff();
+        }
     }
 }

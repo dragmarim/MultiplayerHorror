@@ -34,7 +34,7 @@ public class CrawlTowardHouse : MonoBehaviour
         if (lightOn && Vector3.Distance(new Vector3(-9.5f, 0.5f, -5), transform.position) < 45) {
             runAway = true;
             climbingDownHill = false;
-            CrawlStart();
+            StartCoroutine(CrawlStart());
         }
         if (runAway) {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, -100), 30 * Time.deltaTime);
