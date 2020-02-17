@@ -9,6 +9,7 @@ public class CrawlTowardHouse : MonoBehaviour
     bool startClimbingDownHill;
     bool climbingDownHill;
     bool runAway;
+    public float crawlSpeed;
 
     void Start() {
         climbUpOverHill = false;
@@ -29,7 +30,7 @@ public class CrawlTowardHouse : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(5.5f, 85, 1.8f), 2 * Time.deltaTime);
         }
         if (climbingDownHill && Vector3.Distance(new Vector3(-9.5f, 0.5f, -5), transform.position) > 0.1f && !lightOn) {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(-9.5f, 0.5f, -5), 4 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(-9.5f, 0.2f, -5), crawlSpeed * Time.deltaTime);
         }
         if (lightOn && Vector3.Distance(new Vector3(-9.5f, 0.5f, -5), transform.position) < 45) {
             runAway = true;
@@ -54,5 +55,21 @@ public class CrawlTowardHouse : MonoBehaviour
         yield return new WaitForSeconds(1);
         startClimbingDownHill = false;
         climbingDownHill = true;
+        StartCoroutine(BriefDelay());
+    }
+
+    IEnumerator BriefDelay() {
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(ChangeSpeed());
+    }
+
+    IEnumerator ChangeSpeed() {
+        crawlSpeed = 1;
+        yield return new WaitForSeconds(0.6165f);
+        crawlSpeed = 4;
+        yield return new WaitForSeconds(0.2f);
+        if (climbingDownHill) {
+            StartCoroutine(ChangeSpeed());
+        }
     }
 }
