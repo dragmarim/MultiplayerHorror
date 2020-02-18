@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 494}
   m_MaxSize: {x: 18008, y: 14044}
   vertical: 0
-  controlID: 16362
+  controlID: 4466
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 444}
   m_MaxSize: {x: 4002, y: 8044}
   vertical: 1
-  controlID: 16363
+  controlID: 4445
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,9 +196,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 23.398073, y: -0.3941121, z: 44.526566}
+    m_Target: {x: 490.5, y: 187.5, z: 0}
     speed: 2
-    m_Value: {x: 23.398073, y: -0.3941121, z: 44.526566}
+    m_Value: {x: 490.5, y: 187.5, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -227,13 +227,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.037329614, y: 0.26319253, z: -0.010200848, w: 0.96397734}
+    m_Target: {x: -0.073676616, y: -0.036359847, z: -0.0027097329, w: 0.99662954}
     speed: 2
-    m_Value: {x: 0.03732924, y: 0.2631899, z: -0.010200745, w: 0.9639677}
+    m_Value: {x: -0.07367558, y: -0.036359336, z: -0.0027096947, w: 0.9966155}
   m_Size:
-    m_Target: 53.922276
+    m_Target: 277.74335
     speed: 2
-    m_Value: 53.922276
+    m_Value: 277.74335
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -346,7 +346,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 948
+    width: 981
     height: 607
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &8
@@ -368,8 +368,8 @@ MonoBehaviour:
     y: 626
     width: 981
     height: 321
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 16300
+  controlID: 4415
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -454,10 +454,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 507}
+      scrollPos: {x: 0, y: 128}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1872ffffec5b0000fe5b0000
+      m_ExpandedIDs: 7eeeffffe6410000104200002842000078420000de420000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -500,8 +500,8 @@ MonoBehaviour:
     y: 429
     width: 412
     height: 518
-  m_MinSize: {x: 234, y: 272}
-  m_MaxSize: {x: 10004, y: 10022}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -546,20 +546,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs
+    - Assets/fonts
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs
+  - Assets/fonts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\masse\MultiplayerHorror\Horror Coop Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9e610000
-    m_LastClickedID: 24990
-    m_ExpandedIDs: 000000004a5300008653000072540000e25500000e5600007256000024570000385700006657000098610000a661000000ca9a3b
+    m_SelectedIDs: 8e480000
+    m_LastClickedID: 18574
+    m_ExpandedIDs: 000000001c310000723100000a3300000c3600004e3600003037000086380000b4380000fe38000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,7 +587,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a5300008653000072540000e25500000e5600007256000024570000385700006657000000ca9a3b
+    m_ExpandedIDs: 000000001c310000723100000a3300000c3600004e3600003037000086380000b4380000fe38000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,10 +612,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 82420000
+    m_LastClickedInstanceID: 17026
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: 22510000000000005030000082410000
+    m_ExpandedInstanceIDs: 22510000503000008241000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -705,5 +705,5 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 17026
   m_LastVerticalScrollValue: 0
