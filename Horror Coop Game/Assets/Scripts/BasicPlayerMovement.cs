@@ -6,6 +6,7 @@ public class BasicPlayerMovement : MonoBehaviour
 {
 	public GameObject targetName;
 	public bool isActive;
+	public GameObject lookingAt;
 
 	public bool grounded;
 	public float speed;
@@ -92,11 +93,14 @@ public class BasicPlayerMovement : MonoBehaviour
 			if (Physics.Raycast (ray, out hit, 3)) {
 				if (hit.collider.tag == "Rune") {
 					targetName.GetComponent<Text>().text = hit.collider.name;
+					lookingAt = hit.collider.gameObject;
 				} else {
 					targetName.GetComponent<Text>().text = "";
+					lookingAt = null;
 				}
 			} else {
 				targetName.GetComponent<Text>().text = "";
+				lookingAt = null;
 			}
 			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A)) {
 				anim.SetBool ("Walking", true);
@@ -192,14 +196,14 @@ public class BasicPlayerMovement : MonoBehaviour
 	public void DieFromMask(GameObject mask) {
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		GetComponent<MouseLook>().enabled = false;
+		//GetComponent<MouseLook>().enabled = false;
 		cam.transform.LookAt(new Vector3(mask.transform.position.x, 0.7f, mask.transform.position.z));
 	}
 
 	IEnumerator Hiding() {
 		moveTowardsHiding = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		GetComponent<MouseLook>().enabled = false;
+		//GetComponent<MouseLook>().enabled = false;
 		GetComponent<CapsuleCollider>().enabled = false;
 		yield return new WaitForSeconds(0.5f);
 		moveTowardsHiding = false;
@@ -230,7 +234,7 @@ public class BasicPlayerMovement : MonoBehaviour
 		isActive = false;
 		isHiding = false;
 		cam.GetComponent<MouseLook>().enabled = true;
-		GetComponent<MouseLook>().enabled = true;
+		//GetComponent<MouseLook>().enabled = true;
 		GetComponent<CapsuleCollider>().enabled = true;
 	}
 }

@@ -59,14 +59,14 @@ public class CrawlTowardHouse : MonoBehaviour
     }
 
     IEnumerator BriefDelay() {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         StartCoroutine(ChangeSpeed());
     }
 
     IEnumerator ChangeSpeed() {
-        crawlSpeed = 1;
+        crawlSpeed = 1.5f;
         yield return new WaitForSeconds(0.6165f);
-        crawlSpeed = 4;
+        crawlSpeed = 5;
         yield return new WaitForSeconds(0.2f);
         if (climbingDownHill) {
             StartCoroutine(ChangeSpeed());

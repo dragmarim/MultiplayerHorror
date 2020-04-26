@@ -6,6 +6,27 @@ using UnityEngine.UI;
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
 public class MouseLook : MonoBehaviour {
 
+	public float mouseSensitivity = 100f;
+	public GameObject playerBody;
+
+	float xRotation = 0f;
+
+	void Start() {
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+	void Update() {
+		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+		xRotation -= mouseY;
+		xRotation = Mathf.Clamp(xRotation, -70f, 70f);
+
+		transform.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+		playerBody.transform.Rotate(Vector3.up * mouseX);
+	}
+
+/*
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
 	public float sensitivityX = 15F;
@@ -155,4 +176,5 @@ public class MouseLook : MonoBehaviour {
 		sensitivityX = 5 * sensitivitySlider.value;
 		sensitivityY = 5 * sensitivitySlider.value;
 	}
+	*/
 }
