@@ -20,6 +20,7 @@ public class SpiderCooldown : MonoBehaviour
     public int remainingScrews;
 
     public AudioClip spiderWalking;
+    public AudioClip spiderWalking2;
     public AudioClip screwFalling;
     public AudioClip ventCoverFallOff;
     AudioSource aud;
@@ -37,7 +38,7 @@ public class SpiderCooldown : MonoBehaviour
     IEnumerator Countdown() {
         yield return new WaitForSeconds(1);
         if (nothingInVentTimer > 0) {
-            if (spiderIsVisible) {
+            if (spiderIsVisible && ventLight.GetComponent<Flicker>().lightIsOff) {
                 spiderIsVisible = false;
                 spider.SetActive(false);
                 Debug.Log("spider invisible");
@@ -45,7 +46,12 @@ public class SpiderCooldown : MonoBehaviour
             nothingInVentTimer -= 1;
             if (nothingInVentTimer == 0) {
                 //aud.clip = spiderWalking;
-                AudioSource.PlayClipAtPoint(spiderWalking, transform.position);
+                int rand = Random.Range(1, 3);
+                if (rand == 1) {
+                    AudioSource.PlayClipAtPoint(spiderWalking, transform.position);
+                } else {
+                    AudioSource.PlayClipAtPoint(spiderWalking2, transform.position);
+                }
             }
         } else if (spiderApproachingVentTimer > 0) {
             spiderApproachingVentTimer -= 1;
@@ -61,7 +67,7 @@ public class SpiderCooldown : MonoBehaviour
             timeLeftUntilUnscrew -= 1;
             if (timeLeftUntilUnscrew <= 0 && ventLight.GetComponent<Flicker>().lightIsOff && !spiderLeftVent) {
                 //aud.clip = screwFalling;
-                AudioSource.PlayClipAtPoint(screwFalling, transform.position);
+                AudioSource.PlayClipAtPoint(screwFalling, transform.position, 0.2f);
                 remainingScrews -= 1;
                 if (remainingScrews > 0) {
                     timeLeftUntilUnscrew = timeToUnscrew;

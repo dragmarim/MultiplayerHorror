@@ -15640,7 +15640,8 @@ MonoBehaviour:
   spiderApproachingVentTimerDefault: 3
   timeToUnscrew: 3
   remainingScrews: 2
-  spiderWalking: {fileID: 8300000, guid: 32108c5322a517f489c44cb8e391f959, type: 3}
+  spiderWalking: {fileID: 8300000, guid: 041d3d03255f70640a0f650755e668d4, type: 3}
+  spiderWalking2: {fileID: 8300000, guid: 12e11259aec653346adfdb651d135143, type: 3}
   screwFalling: {fileID: 8300000, guid: 80390dd450c0afb43a71d20a784f288f, type: 3}
   ventCoverFallOff: {fileID: 8300000, guid: fa58d92d42be88748910aa48e5f16109, type: 3}
 --- !u!82 &1686841549
@@ -15655,7 +15656,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 32108c5322a517f489c44cb8e391f959, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -16730,16 +16731,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: crawliboi
       objectReference: {fileID: 0}
-    - target: {fileID: 4224801822505238522, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8274873701517981592, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
         type: 3}
       propertyPath: m_Controller
@@ -16799,6 +16790,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224801822505238522, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274873701517981592, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fe37e8a913c0b14da15f2352b16ebf3, type: 3}
