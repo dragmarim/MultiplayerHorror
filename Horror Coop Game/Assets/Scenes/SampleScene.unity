@@ -3054,6 +3054,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5c7aa6e3ecce5cb4f9ceb45eef3b49cf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36870f1d0962ecb47baa7db5f11a59f5, type: 3}
+--- !u!1 &319561153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2134714439290285453, guid: 36870f1d0962ecb47baa7db5f11a59f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 319561152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &328302219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7267,7 +7273,7 @@ Transform:
   m_GameObject: {fileID: 779367019}
   m_LocalRotation: {x: -0.6011274, y: 0.6011274, z: 0.37235177, w: 0.37235177}
   m_LocalPosition: {x: -6.12, y: 3.832, z: -5.667}
-  m_LocalScale: {x: 0.040370017, y: 0.6406902, z: 0.036630027}
+  m_LocalScale: {x: 0.040370014, y: 0.6406902, z: 0.036630027}
   m_Children: []
   m_Father: {fileID: 292731271}
   m_RootOrder: 4
@@ -11853,11 +11859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c6670c83a085f458f868b78d99ead0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 7
+  waitTime: 6
   flickerSpeed: 0.02
   maxLight: 1.2
-  flickerOn: 0
-  flickerOff: 0
+  lightIsOff: 0
 --- !u!4 &1297047680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4661051229156556, guid: e8e4c79974d5dd2469bc0c0055921376,
@@ -15627,6 +15632,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8296172668005743766}
+  ventLight: {fileID: 1292189399}
+  spider: {fileID: 319561153}
+  spiderIsVisible: 0
+  spiderLeftVent: 0
   nothingInVentTimerDefault: 10
   spiderApproachingVentTimerDefault: 3
   timeToUnscrew: 3

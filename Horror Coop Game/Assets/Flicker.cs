@@ -8,11 +8,13 @@ public class Flicker : MonoBehaviour
     public float flickerSpeed;
     public float maxLight;
     float currentTime;
-    public bool flickerOn;
-    public bool flickerOff;
+    public bool lightIsOff;
+    bool flickerOn;
+    bool flickerOff;
     Light lt;
 
     void Start() {
+        lightIsOff = true;
         lt = this.GetComponent<Light>();
         flickerOn = false;
         flickerOff = false;
@@ -32,6 +34,7 @@ public class Flicker : MonoBehaviour
         if (currentTime >= waitTime) {
             currentTime -= waitTime;
             flickerOn = true;
+            lightIsOff = false;
         }
         if (flickerOn) {
             if (lt.intensity < maxLight) {
@@ -46,6 +49,7 @@ public class Flicker : MonoBehaviour
                 lt.intensity -= flickerSpeed;
             } else {
                 flickerOff = false;
+                lightIsOff = true;
             }
         }
     }
