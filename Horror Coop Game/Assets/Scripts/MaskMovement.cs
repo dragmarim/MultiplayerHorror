@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MaskMovement : MonoBehaviour
 {
+    public AudioClip screamClip;
     public bool willAttack;
     bool isActive;
     public GameObject childObject;
@@ -82,6 +83,8 @@ public class MaskMovement : MonoBehaviour
     }
 
     IEnumerator DeathAnimation() {
+        GetComponent<AudioSource>().clip = screamClip;
+        GetComponent<AudioSource>().Play();
         childObject.GetComponent<Float>().enabled = false;
         childObject.transform.localPosition = new Vector3(0,0,0);
         transform.LookAt(new Vector3(player.transform.position.x, 1.7f, player.transform.position.z));

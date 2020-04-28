@@ -7570,7 +7570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &804653646
 Transform:
   m_ObjectHideFlags: 0
@@ -15061,11 +15061,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446510, guid: 9cf03dec5e2842b49bb293defe2c1e13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446510, guid: 9cf03dec5e2842b49bb293defe2c1e13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446510, guid: 9cf03dec5e2842b49bb293defe2c1e13, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15644,10 +15644,11 @@ MonoBehaviour:
   spiderApproachingVentTimerDefault: 3
   timeToUnscrew: 3
   remainingScrews: 2
+  bangOnVent: {fileID: 8300000, guid: 36c74b73fb11e57479de5131e0cb74a6, type: 3}
   spiderWalking: {fileID: 8300000, guid: 041d3d03255f70640a0f650755e668d4, type: 3}
   spiderWalking2: {fileID: 8300000, guid: 12e11259aec653346adfdb651d135143, type: 3}
   screwFalling: {fileID: 8300000, guid: 80390dd450c0afb43a71d20a784f288f, type: 3}
-  ventCoverFallOff: {fileID: 8300000, guid: fa58d92d42be88748910aa48e5f16109, type: 3}
+  ventCoverFallOff: {fileID: 8300000, guid: f0f970274ba18504ab0f87dd76d4861b, type: 3}
 --- !u!82 &1686841549
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16839,6 +16840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d068562aa4faaf3429321ea228e6794b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screamClip: {fileID: 8300000, guid: bb36296b2d9b7e54895c6ee963a8e3b6, type: 3}
   willAttack: 0
   childObject: {fileID: 404136113}
   maskSpawner: {fileID: 343863853}
