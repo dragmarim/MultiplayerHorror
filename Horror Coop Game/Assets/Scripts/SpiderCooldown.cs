@@ -53,6 +53,7 @@ public class SpiderCooldown : MonoBehaviour
     void Update() {
         if (canFall) {
             if (!startFalling) {
+                jumpscareSpider.GetComponent<AudioSource>().Play();
                 startFalling = true;
                 jumpscareSpider.transform.position = new Vector3(player.transform.position.x, 5, player.transform.position.z);
                 jumpscareSpider.transform.position += player.transform.forward / 3.6f;
@@ -60,7 +61,7 @@ public class SpiderCooldown : MonoBehaviour
                 player.GetComponent<BasicPlayerMovement>().DieFromSpider();
             }
             if (jumpscareSpider.transform.position.y > 2.15f) {
-                jumpscareSpider.transform.position = new Vector3 (jumpscareSpider.transform.position.x, jumpscareSpider.transform.position.y-0.15f, jumpscareSpider.transform.position.z);
+                jumpscareSpider.transform.position = new Vector3 (jumpscareSpider.transform.position.x, jumpscareSpider.transform.position.y-0.1f, jumpscareSpider.transform.position.z);
             } else {
                 blackout.SetActive(true);
             }
