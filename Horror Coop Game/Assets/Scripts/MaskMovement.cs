@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MaskMovement : MonoBehaviour
 {
-    bool willAttack;
+    public AudioClip screamClip;
+    public bool willAttack;
     bool isActive;
+    public GameObject childObject;
     public GameObject maskSpawner;
     public GameObject player;
     public GameObject target;
@@ -52,7 +54,7 @@ public class MaskMovement : MonoBehaviour
 			transform.position = Vector3.Lerp(transform.position, new Vector3(4.65f, 0.5f, 4.65f), 1 * Time.deltaTime);
 		}
         if (attackPlayer) {
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, 1.9f, target.transform.position.z), 30 * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, 1.7f, target.transform.position.z), 30 * Time.deltaTime);
 		}
     }
 
@@ -81,13 +83,18 @@ public class MaskMovement : MonoBehaviour
     }
 
     IEnumerator DeathAnimation() {
+        GetComponent<AudioSource>().clip = screamClip;
+        GetComponent<AudioSource>().Play();
+        childObject.GetComponent<Float>().enabled = false;
+        childObject.transform.localPosition = new Vector3(0,0,0);
         transform.LookAt(new Vector3(player.transform.position.x, 1.7f, player.transform.position.z));
-        transform.position = new Vector3(transform.position.x, 1.6f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 1.85f, transform.position.z);
         attackPlayer = true;
         Debug.Log(Vector3.Distance(transform.position, player.transform.position)/33);
         yield return new WaitForSeconds(Vector3.Distance(transform.position, player.transform.position)/33);
         attackPlayer = false;
         yield return new WaitForSeconds(0.05f);
         blackout.SetActive(true);
+        GetComponent<AudioSource>().enabled = false;
     }
 }

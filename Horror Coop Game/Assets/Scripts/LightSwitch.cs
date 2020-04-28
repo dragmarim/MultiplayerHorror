@@ -37,7 +37,7 @@ public class LightSwitch : MonoBehaviour
     }
 
     void OnMouseOver() {
-        if (Vector3.Distance(player.transform.position, transform.position) < 3.6f) {
+        if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject) {
             if (Input.GetMouseButton(0) && !isSwitched) {
                 audio.clip = lightOnSound;
                 audio.Play();

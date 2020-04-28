@@ -103,7 +103,6 @@ GameObject:
   - component: {fileID: 6756202106260191160}
   - component: {fileID: 8516989736857040213}
   - component: {fileID: 8516989736857040200}
-  - component: {fileID: 8516989736857040212}
   m_Layer: 0
   m_Name: basicdude
   m_TagString: Untagged
@@ -177,6 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdddfd31a60e2f04a9efb027ea49e703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetName: {fileID: 0}
+  isActive: 0
+  lookingAt: {fileID: 0}
   grounded: 0
   speed: 2
   cam: {fileID: 8516989736391309620}
@@ -185,28 +187,16 @@ MonoBehaviour:
   lowJumpMultiplier: 2
   distToGround: 0
   isSprinting: 0
---- !u!114 &8516989736857040212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365776853834672337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6529cd3ff89cdfe49bed150b648148ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 1
-  sensitivityX: 15
-  sensitivityY: 15
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
-  frameCounter: 20
-  sensitivitySlider: {fileID: 0}
-  islocked: 0
+  isWalking: 0
+  anim: {fileID: 0}
+  isHiding: 0
+  moveTowardsHiding: 0
+  crouchWhileHiding: 0
+  crawlIntoHiding: 0
+  rotateWhileHiding: 0
+  doneHiding: 0
+  crawlOutOfHiding: 0
+  standOutOfHiding: 0
 --- !u!1 &566087112955858797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,13 +1296,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6529cd3ff89cdfe49bed150b648148ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 2
-  sensitivityX: 15
-  sensitivityY: 15
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
-  frameCounter: 20
-  sensitivitySlider: {fileID: 0}
-  islocked: 0
+  mouseSensitivity: 100
+  playerBody: {fileID: 0}
