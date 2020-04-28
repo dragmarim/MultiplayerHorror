@@ -123,7 +123,6 @@ public class BasicPlayerMovement : MonoBehaviour
 			} else if (playerRigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.Space)) {
 				playerRigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
 			}
-			*/
 			if (Input.GetKey (KeyCode.LeftShift) && grounded) {
 				isSprinting = true;
 				anim.SetBool ("Running", true);
@@ -131,8 +130,9 @@ public class BasicPlayerMovement : MonoBehaviour
 				isSprinting = false;
 				anim.SetBool ("Running", false);
 			}
-			//float v = Input.GetAxisRaw ("Vertical");
-			//float h = Input.GetAxisRaw ("Horizontal");
+			float v = Input.GetAxisRaw ("Vertical");
+			float h = Input.GetAxisRaw ("Horizontal");
+			*/
 			Move ();
 			//Jumping ();
 		}
@@ -206,6 +206,14 @@ public class BasicPlayerMovement : MonoBehaviour
 		//GetComponent<MouseLook>().enabled = false;
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 		cam.transform.LookAt(new Vector3(mask.transform.position.x, 0.7f, mask.transform.position.z));
+	}
+
+	public void DieFromSpider() {
+		isActive = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		//GetComponent<MouseLook>().enabled = false;
+		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+		cam.transform.eulerAngles = new Vector3(-90, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 	}
 
 	IEnumerator Hiding() {

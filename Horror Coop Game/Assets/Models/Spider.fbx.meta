@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: -4799524434163024911
     second: Armature|walk
+  - first:
+      74: 8851788401017990600
+    second: Armature|Armature|Armature|walk|Armature|walk
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -67,8 +70,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|walk
-      takeName: Armature|walk
+      name: Armature|Armature|Armature|walk|Armature|walk
+      takeName: Armature|Armature|Armature|walk|Armature|walk
       internalID: 0
       firstFrame: 0
       lastFrame: 10

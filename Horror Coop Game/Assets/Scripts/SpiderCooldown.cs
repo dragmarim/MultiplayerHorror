@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SpiderCooldown : MonoBehaviour
 {
+    public int jumpscareWaitMin;
+    public int jumpscareWaitMax;
+    public GameObject jumpscareSpider;
+    public bool canFall;
+    public bool startFalling;
+    public GameObject blackout;
+
     public bool bangOnVentOnCooldown;
     public GameObject player;
     public GameObject ventLight;
@@ -30,16 +37,34 @@ public class SpiderCooldown : MonoBehaviour
     AudioSource aud;
 
     void Start() {
+        startFalling = false;
+        canFall = false;
         bangOnVentOnCooldown = false;
         waited = false;
         waitForFlicker = false;
         spiderLeftVent = false;
         spiderIsVisible = false;
-        spider.SetActive(false);
         aud = GetComponent<AudioSource>();
         nothingInVentTimer = nothingInVentTimerDefault;
         spiderApproachingVentTimer = spiderApproachingVentTimerDefault;
         StartCoroutine(Countdown());
+    }
+
+    void Update() {
+        if (canFall) {
+            if (!startFalling) {
+                startFalling = true;
+                jumpscareSpider.transform.position = new Vector3(player.transform.position.x, 5, player.transform.position.z);
+                jumpscareSpider.transform.position += player.transform.forward / 3.6f;
+                jumpscareSpider.transform.eulerAngles = new Vector3(70, player.transform.eulerAngles.y-180, 0);
+                player.GetComponent<BasicPlayerMovement>().DieFromSpider();
+            }
+            if (jumpscareSpider.transform.position.y > 2.15f) {
+                jumpscareSpider.transform.position = new Vector3 (jumpscareSpider.transform.position.x, jumpscareSpider.transform.position.y-0.15f, jumpscareSpider.transform.position.z);
+            } else {
+                blackout.SetActive(true);
+            }
+        }
     }
 
     IEnumerator Countdown() {
@@ -98,6 +123,7 @@ public class SpiderCooldown : MonoBehaviour
                     AudioSource.PlayClipAtPoint(ventCoverFallOff, transform.position, 0.8f);
                     yield return new WaitForSeconds(1);
                     GetComponent<Rigidbody>().isKinematic = true;
+                    StartCoroutine(SpiderJumpscare());
                 }
             }
         }
@@ -119,5 +145,11 @@ public class SpiderCooldown : MonoBehaviour
     IEnumerator startCooldown() {
         yield return new WaitForSeconds(2);
         bangOnVentOnCooldown = false;
+    }
+
+    IEnumerator SpiderJumpscare() {
+        int randomWait = Random.Range(jumpscareWaitMin, jumpscareWaitMax);
+        yield return new WaitForSeconds(randomWait);
+        canFall = true;
     }
 }
