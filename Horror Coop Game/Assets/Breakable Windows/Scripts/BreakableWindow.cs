@@ -6,7 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BreakableWindow : MonoBehaviour {
 
-    
+    public GameObject breakSound;
+
     [Tooltip("Layer should be TransparentFX or your own layer for breakable windows.")]
     public LayerMask layer;
     [Range(2,25)]
@@ -152,12 +153,12 @@ public class BreakableWindow : MonoBehaviour {
         MeshCollider col = obj.AddComponent<MeshCollider>();
         col.inflateMesh = true;
         col.convex = true;
-        if (destroyPhysicsTime > 0 && destroyColliderWithPhysics) Destroy(col, destroyPhysicsTime);
+        //if (destroyPhysicsTime > 0 && destroyColliderWithPhysics) Destroy(col, destroyPhysicsTime);
         
         Rigidbody rigid = obj.AddComponent<Rigidbody>();
         rigid.centerOfMass = (v[0] + v[1] + v[2]) / 3f;
         if (addTorques && preCalculate == false) rigid.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
-        if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
+        //if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
 
         MeshRenderer mr = obj.AddComponent<MeshRenderer>();
         mr.materials = GetComponent<Renderer>().materials;
@@ -206,7 +207,7 @@ public class BreakableWindow : MonoBehaviour {
                 {
                     for (int i = 0; i < splinters.Count; i++)
                     {
-                        splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+                        splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));       
                     }
                 }
             }
@@ -226,15 +227,22 @@ public class BreakableWindow : MonoBehaviour {
 
         if (breakingSound != null)
         {
-            GetComponent<AudioSource>().clip = breakingSound;
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().clip = breakingSound;
+            //GetComponent<AudioSource>().Play();
         }
 
         return splinters.ToArray();
     }
 
-
     public void collide() {
-        breakWindow();    
+        Debug.Log("broken");
+        Instantiate(breakSound, transform.position, transform.rotation);
+        breakWindow();
+        StartCoroutine(windowBreak());
+    }
+
+    IEnumerator windowBreak() {
+        yield return new WaitForSeconds(0.2f);
+        transform.Rotate(0, 180, 0);
     }
 }
