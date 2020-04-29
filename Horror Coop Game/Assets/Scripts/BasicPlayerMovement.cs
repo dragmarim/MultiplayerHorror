@@ -40,6 +40,9 @@ public class BasicPlayerMovement : MonoBehaviour
 	bool standUpFromCouch = false;
 	public bool doneSitting = false;
 
+	public GameObject car;
+	public bool moveTowardsCar = false;
+
 	public bool crawlOutOfHiding;
 	public bool standOutOfHiding;
 	
@@ -114,6 +117,11 @@ public class BasicPlayerMovement : MonoBehaviour
 		if (standUpFromCouch) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(2, 0, 3), counter / 1);
 		}
+		if (moveTowardsCar) {
+			transform.position = Vector3.Lerp(transform.position, new Vector3(3.76f, 0, -4.3f), counter / 1.5f);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 182, 0), 4 * Time.deltaTime);
+			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(6, 0, 0), 4 * Time.deltaTime);
+		}
 	}
 
 	void FixedUpdate () {
@@ -140,28 +148,7 @@ public class BasicPlayerMovement : MonoBehaviour
 				anim.SetBool ("Walking", false);
 				isWalking = false;
 			}
-			/*
-			grounded = isGrounded ();
-			if (grounded) {
-				anim.SetBool ("Jumping", false);
-			}
-			if (playerRigidbody.velocity.y < 0) {
-				playerRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-			} else if (playerRigidbody.velocity.y > 0 && !Input.GetKey (KeyCode.Space)) {
-				playerRigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-			}
-			if (Input.GetKey (KeyCode.LeftShift) && grounded) {
-				isSprinting = true;
-				anim.SetBool ("Running", true);
-			} else if (!Input.GetKey (KeyCode.LeftShift)) {
-				isSprinting = false;
-				anim.SetBool ("Running", false);
-			}
-			float v = Input.GetAxisRaw ("Vertical");
-			float h = Input.GetAxisRaw ("Horizontal");
-			*/
 			Move ();
-			//Jumping ();
 		}
 	}
 
@@ -202,20 +189,6 @@ public class BasicPlayerMovement : MonoBehaviour
 			playerRigidbody.MovePosition (transform.position - transform.right * Time.deltaTime * speed/2);
 		}
 	}	
-	/*
-	void Jumping()
-	{
-		if (Input.GetKey (KeyCode.Space) && grounded) {
-			playerRigidbody.velocity = Vector3.up * jumpVelocity;
-			anim.SetBool ("Jumping", true);
-			anim.Play("Jumping", -1, 0f);
-		}
-	}
-
-	bool isGrounded() {
-		return Physics.Raycast (transform.position, Vector3.down, distToGround);
-	}
-	*/
 
 	public void Hide() {
 		if (!isHiding) {
@@ -235,6 +208,19 @@ public class BasicPlayerMovement : MonoBehaviour
 			doneSitting = false;
 			StartCoroutine(Sitting());
 		}
+	}
+
+	public void WindUpCar() {
+		isActive = true;
+		targetName.GetComponent<Text>().text = "";
+		StartCoroutine(WindingUpCar());
+	}
+
+	public void DoneWinding() {
+		GetComponent<CapsuleCollider>().enabled = true;
+		cam.GetComponent<MouseLook>().xRotation = cam.transform.eulerAngles.x;
+		cam.GetComponent<MouseLook>().enabled = true;
+		isActive = false;
 	}
 
 	public void DieFromMask(GameObject mask) {
@@ -299,26 +285,13 @@ public class BasicPlayerMovement : MonoBehaviour
 		counter = 0;
 		moveTowardsCouch = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		//GetComponent<MouseLook>().enabled = false;
 		GetComponent<CapsuleCollider>().enabled = false;
 		yield return new WaitForSeconds(0.8f);
 		moveTowardsCouch = false;
-		//transform.position = new Vector3(2, 0, 3);
 		sit = true;
 		yield return new WaitForSeconds(0.8f);
 		sit = false;
 		doneSitting = true;
-		//transform.position = new Vector3(3, -0.25f, 3.85f);
-		/*
-		crawlIntoHiding = true;
-		yield return new WaitForSeconds(0.7f);
-		crawlIntoHiding = false;
-		transform.position = new Vector3(-4.75f, -1, 4.3f);
-		rotateWhileHiding = true;
-		yield return new WaitForSeconds(1);
-		rotateWhileHiding = false;
-		doneHiding = true;
-		*/
 	}
 
 	IEnumerator StandUp() {
@@ -336,5 +309,16 @@ public class BasicPlayerMovement : MonoBehaviour
 		cam.GetComponent<MouseLook>().enabled = true;
 		isActive = false;
 		isSitting = false;
+	}
+
+	IEnumerator WindingUpCar() {
+		isWalking = false;
+		counter = 0;
+		moveTowardsCar = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		GetComponent<CapsuleCollider>().enabled = false;
+		yield return new WaitForSeconds(0.7f);
+		moveTowardsCar = false;
+		car.GetComponent<Drive>().PowerUpCar();
 	}
 }
