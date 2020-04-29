@@ -10,15 +10,24 @@ public class MannequinManager : MonoBehaviour
     
     public GameObject mannequinIdle;
     public GameObject mannequinSitting;
+    public GameObject mannequinPoint;
     public GameObject couch;
+    public GameObject car;
 
     void Update() {
         currentTime += Time.deltaTime;
         if (currentTime >= delayBeforeActive && !isActive) {
             isActive = true;
             mannequinIdle.SetActive(false);
-            mannequinSitting.SetActive(true);
-            couch.transform.tag = "Rune";
+            //int rand = Random.Range(1, 4);
+            int rand = 2;
+            if (rand == 1) {
+                mannequinSitting.SetActive(true);
+                couch.transform.tag = "Rune";
+            } else if (rand == 2) {
+                mannequinPoint.SetActive(true);
+                car.transform.tag = "Rune";
+            }
         }
     }
 }

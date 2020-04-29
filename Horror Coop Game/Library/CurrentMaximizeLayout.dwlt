@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 494}
   m_MaxSize: {x: 18008, y: 14044}
   vertical: 0
-  controlID: 2859
+  controlID: 1305
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 444}
   m_MaxSize: {x: 4002, y: 8044}
   vertical: 1
-  controlID: 2860
+  controlID: 1279
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,9 +196,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.388811, y: 1.56546, z: -5.139713}
+    m_Target: {x: 1.6402062, y: 2.1077454, z: -9.297003}
     speed: 2
-    m_Value: {x: 2.388811, y: 1.56546, z: -5.139713}
+    m_Value: {x: 1.6402062, y: 2.1077454, z: -9.297003}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -227,13 +227,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.11417853, y: -0.7512967, z: 0.1344761, w: 0.6361982}
+    m_Target: {x: -0.0024902408, y: 0.9979798, z: 0.053617094, w: 0.038848028}
     speed: 2
-    m_Value: {x: 0.11416052, y: -0.7511782, z: 0.13445489, w: 0.6360979}
+    m_Value: {x: -0.0024898003, y: 0.99780333, z: 0.05360761, w: 0.03884116}
   m_Size:
-    m_Target: 2.8737226
+    m_Target: 7.942985
     speed: 2
-    m_Value: 2.8737226
+    m_Value: 7.942985
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -419,8 +419,8 @@ MonoBehaviour:
     y: 392
     width: 866
     height: 339
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 2779
+  controlID: 1306
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -508,7 +508,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c6beffff60fbffff
+      m_ExpandedIDs: 6efbffffda400000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -597,20 +597,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Models
+  - Assets/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Lucas\MultiplayerHorror\Horror Coop Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 082e0000
-    m_LastClickedID: 11784
-    m_ExpandedIDs: 00000000e42d0000502e00004030000080330000e2330000ce3400002e3500004a360000783600002e370000f03c000000ca9a3b
+    scrollPos: {x: 0, y: 201}
+    m_SelectedIDs: c8320000
+    m_LastClickedID: 13000
+    m_ExpandedIDs: 00000000dc2d0000482e00003830000082330000e6330000d8340000383500006e3600009c36000052370000263d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -638,7 +638,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e42d0000502e00004030000080330000e2330000ce3400002e3500004a360000783600002e370000f03c000000ca9a3b
+    m_ExpandedIDs: 00000000dc2d0000482e00003830000082330000e6330000d8340000383500006e3600009c36000052370000263d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -663,8 +663,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 64530000
-    m_LastClickedInstanceID: 21348
+    m_SelectedInstanceIDs: 2a3f0000
+    m_LastClickedInstanceID: 16170
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300002a3500005e3b0000083f00004a350000aa3f0000
     m_RenameOverlay:
@@ -756,5 +756,5 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: 21348
-  m_LastVerticalScrollValue: 100
+  m_LastInspectedObjectInstanceID: 16170
+  m_LastVerticalScrollValue: 0
