@@ -9,7 +9,7 @@ public class MouseLook : MonoBehaviour {
 	public float mouseSensitivity = 100f;
 	public GameObject playerBody;
 
-	float xRotation = 0f;
+	public float xRotation = 0f;
 
 	void Start() {
 		Cursor.lockState = CursorLockMode.Locked;

@@ -21,12 +21,13 @@ public class LightSwitch : MonoBehaviour
     }
 
     void Update() {
-        if (Vector3.Distance(player.transform.position, transform.position) > 3.6f && isSwitched) {
+        if (player.GetComponent<BasicPlayerMovement>().lookingAt != this.gameObject && isSwitched) {
             TurnOff();
         }
     }
 
     void TurnOff() {
+        Debug.Log("turned off");
         audio.clip = lightOffSound;
         audio.Play();
         button.transform.localPosition = new Vector3(0, 0, 0);
@@ -39,18 +40,16 @@ public class LightSwitch : MonoBehaviour
     void OnMouseOver() {
         if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject) {
             if (Input.GetMouseButton(0) && !isSwitched) {
+                Debug.Log("turned on");
                 audio.clip = lightOnSound;
                 audio.Play();
-                Debug.Log("Worked");
                 button.transform.localPosition = new Vector3(0, 0, -0.02f);
                 button.transform.localRotation = Quaternion.Euler(-45, 0, 0);
                 spotLight.SetActive(true);
                 roadKill.GetComponent<CrawlTowardHouse>().lightOn = true;
                 isSwitched = true;
-            } else {
-                if (!Input.GetMouseButton(0) && isSwitched) {
-                    TurnOff();
-                }
+            } else if (!Input.GetMouseButton(0) && isSwitched) {
+                TurnOff();
             }
         }
     }

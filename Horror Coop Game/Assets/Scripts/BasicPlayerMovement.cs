@@ -33,10 +33,21 @@ public class BasicPlayerMovement : MonoBehaviour
 	public bool rotateWhileHiding;
 	public bool doneHiding;
 
+	public bool isSitting = false;
+	bool moveTowardsCouch = false;
+	bool sit = false;
+	bool scootForward = false;
+	bool standUpFromCouch = false;
+	public bool doneSitting = false;
+
 	public bool crawlOutOfHiding;
 	public bool standOutOfHiding;
+	
+
+	public float counter = 0;
 
 	void Start () {
+		isSitting = false;
 		isActive = false;
 		doneHiding = false;
 		isHiding = false;
@@ -62,6 +73,10 @@ public class BasicPlayerMovement : MonoBehaviour
 			doneHiding = false;
 			StartCoroutine(GetOutOfHiding());
 		}
+		if (Input.GetMouseButtonDown(0) && doneSitting) {
+			doneSitting = false;
+			StartCoroutine(StandUp());
+		}
 		if (moveTowardsHiding) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(-5.5f, 0, 3), 6 * Time.deltaTime);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 35, 0), 4 * Time.deltaTime);
@@ -84,12 +99,24 @@ public class BasicPlayerMovement : MonoBehaviour
 		if (standOutOfHiding) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(-5.5f, 0, 3), 6 * Time.deltaTime);
 		}
+		counter += Time.deltaTime;
+		if (moveTowardsCouch) {
+			transform.position = Vector3.Lerp(transform.position, new Vector3(2, 0, 3), counter / 6);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -115, 0), 4 * Time.deltaTime);
+			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(0, 0, 0), 4 * Time.deltaTime);
+		}
+		if (sit) {
+			transform.position = Vector3.Lerp(transform.position, new Vector3(3, -0.25f, 3.85f), 6 * Time.deltaTime);
+		}
+		if (scootForward) {
+			transform.position = Vector3.Lerp(transform.position, new Vector3(2.5f, -0.25f, 3.425f), counter / 1);
+		}
+		if (standUpFromCouch) {
+			transform.position = Vector3.Lerp(transform.position, new Vector3(2, 0, 3), counter / 1);
+		}
 	}
 
 	void FixedUpdate () {
-		if (!isHiding) {
-			transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		}
 		if (!isActive) {
 			Ray ray = new Ray(cam.transform.position, cam.transform.forward * 3);
 			RaycastHit hit;
@@ -200,6 +227,16 @@ public class BasicPlayerMovement : MonoBehaviour
 		}
 	}
 
+	public void SitDown() {
+		if (!isSitting) {
+			isActive = true;
+			targetName.GetComponent<Text>().text = "";
+			isSitting = true;
+			doneSitting = false;
+			StartCoroutine(Sitting());
+		}
+	}
+
 	public void DieFromMask(GameObject mask) {
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
@@ -250,10 +287,54 @@ public class BasicPlayerMovement : MonoBehaviour
 		GetComponent<CapsuleCollider>().enabled = true;
 		isActive = false;
 		isHiding = false;
+		cam.GetComponent<MouseLook>().xRotation = cam.transform.eulerAngles.x;
 		if (!floatingMask.GetComponent<MaskMovement>().willAttack) {
-			Debug.Log("not will attack");
 			cam.GetComponent<MouseLook>().enabled = true;
 			//GetComponent<MouseLook>().enabled = true;
 		}
+	}
+
+	IEnumerator Sitting() {
+		isWalking = false;
+		counter = 0;
+		moveTowardsCouch = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		//GetComponent<MouseLook>().enabled = false;
+		GetComponent<CapsuleCollider>().enabled = false;
+		yield return new WaitForSeconds(0.8f);
+		moveTowardsCouch = false;
+		//transform.position = new Vector3(2, 0, 3);
+		sit = true;
+		yield return new WaitForSeconds(0.8f);
+		sit = false;
+		doneSitting = true;
+		//transform.position = new Vector3(3, -0.25f, 3.85f);
+		/*
+		crawlIntoHiding = true;
+		yield return new WaitForSeconds(0.7f);
+		crawlIntoHiding = false;
+		transform.position = new Vector3(-4.75f, -1, 4.3f);
+		rotateWhileHiding = true;
+		yield return new WaitForSeconds(1);
+		rotateWhileHiding = false;
+		doneHiding = true;
+		*/
+	}
+
+	IEnumerator StandUp() {
+		counter = 0;
+		scootForward = true;
+		yield return new WaitForSeconds(0.4f);
+		scootForward = false;
+		counter = 0;
+		standUpFromCouch = true;
+		yield return new WaitForSeconds(0.4f);
+		standUpFromCouch = false;
+		transform.position = new Vector3(2, 0, 3);
+		GetComponent<CapsuleCollider>().enabled = true;
+		cam.GetComponent<MouseLook>().xRotation = cam.transform.eulerAngles.x;
+		cam.GetComponent<MouseLook>().enabled = true;
+		isActive = false;
+		isSitting = false;
 	}
 }
