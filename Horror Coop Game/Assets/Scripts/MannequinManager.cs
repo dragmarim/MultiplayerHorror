@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MannequinManager : MonoBehaviour
 {
+    public GameObject player;
+
     public float delayBeforeActive;
     public float delayBeforeLeaving;
     float currentTime = 0;
@@ -17,6 +19,7 @@ public class MannequinManager : MonoBehaviour
     public GameObject couch;
     public GameObject car;
     public GameObject arcade;
+    public bool isSitting;
 
     void Update() {
         currentTime += Time.deltaTime;
@@ -28,8 +31,10 @@ public class MannequinManager : MonoBehaviour
         if (awayFromStand && currentTime >= delayBeforeActive && !isActive) {
             isActive = true;
             //int rand = Random.Range(1, 4);
-            int rand = 2;
+            int rand = 1;
             if (rand == 1) {
+                player.GetComponent<BasicPlayerMovement>().timeSpentSitting = 0;
+                isSitting = true;
                 mannequinSitting.SetActive(true);
                 couch.transform.tag = "Rune";
             } else if (rand == 2) {
@@ -40,5 +45,23 @@ public class MannequinManager : MonoBehaviour
                 arcade.transform.tag = "Rune";
             }
         }
+    }
+
+    public void NoLongerSitting() {
+        couch.transform.tag = "Untagged";
+        isSitting = false;
+        mannequinSitting.SetActive(false);
+        mannequinIdle.SetActive(true);
+        isActive = false;
+        awayFromStand = false;
+        currentTime = 0;
+    }
+
+    public void CarFinished() {
+        mannequinPoint.SetActive(false);
+        mannequinIdle.SetActive(true);
+        isActive = false;
+        awayFromStand = false;
+        currentTime = 0;
     }
 }

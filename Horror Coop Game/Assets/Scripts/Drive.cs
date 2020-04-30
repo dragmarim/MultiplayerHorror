@@ -9,6 +9,7 @@ public class Drive : MonoBehaviour
 
     public GameObject player;
     public GameObject Key;
+    public GameObject mannequinManager;
     public float maxWoundUpTime;
     public float woundUpTime;
     public bool currentlyWinding = false;
@@ -29,6 +30,7 @@ public class Drive : MonoBehaviour
         } else if (!stoppedSound) {
             stoppedSound = true;
             GetComponent<AudioSource>().Stop();
+            StartCoroutine(ShortDelay());
         }
     }
 
@@ -106,5 +108,10 @@ public class Drive : MonoBehaviour
         GetComponent<AudioSource>().clip = windCarSound;
         GetComponent<AudioSource>().Play();
         stoppedSound = false;
+    }
+
+    IEnumerator ShortDelay() {
+        yield return new WaitForSeconds(1);
+        mannequinManager.GetComponent<MannequinManager>().CarFinished();
     }
 }

@@ -33,19 +33,22 @@ public class BasicPlayerMovement : MonoBehaviour
 	public bool rotateWhileHiding;
 	public bool doneHiding;
 
+	public GameObject mannequinManager;
+
 	public bool isSitting = false;
 	bool moveTowardsCouch = false;
 	bool sit = false;
 	bool scootForward = false;
 	bool standUpFromCouch = false;
 	public bool doneSitting = false;
+	public float timeSpentSitting = 0;
+	public float timeRequiredToSit;
 
 	public GameObject car;
 	public bool moveTowardsCar = false;
 
 	public bool crawlOutOfHiding;
 	public bool standOutOfHiding;
-	
 
 	public float counter = 0;
 
@@ -69,6 +72,12 @@ public class BasicPlayerMovement : MonoBehaviour
 	}
 
 	void Update() {
+		if (doneSitting) {
+			timeSpentSitting += Time.deltaTime;
+			if (timeSpentSitting >= timeRequiredToSit && mannequinManager.GetComponent<MannequinManager>().isSitting) {
+				mannequinManager.GetComponent<MannequinManager>().NoLongerSitting();
+			}
+		}
 		if (Input.GetKey(KeyCode.Escape)) {
 			Cursor.lockState = CursorLockMode.None;
 		}
@@ -105,7 +114,7 @@ public class BasicPlayerMovement : MonoBehaviour
 		counter += Time.deltaTime;
 		if (moveTowardsCouch) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(2, 0, 3), counter / 6);
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -115, 0), 4 * Time.deltaTime);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -130, 0), counter / 3);
 			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(0, 0, 0), 4 * Time.deltaTime);
 		}
 		if (sit) {
@@ -291,6 +300,7 @@ public class BasicPlayerMovement : MonoBehaviour
 		sit = true;
 		yield return new WaitForSeconds(0.8f);
 		sit = false;
+		timeSpentSitting = 0;
 		doneSitting = true;
 	}
 
