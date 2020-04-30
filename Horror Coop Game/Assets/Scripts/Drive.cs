@@ -18,7 +18,7 @@ public class Drive : MonoBehaviour
     public bool turnKey = false;
     float counter = 0;
     public float newRot = 0;
-    public bool stoppedSound = false;
+    public bool stoppedSound = true;
 
     void FixedUpdate()
     {
@@ -112,6 +112,7 @@ public class Drive : MonoBehaviour
 
     IEnumerator ShortDelay() {
         yield return new WaitForSeconds(1);
+        Debug.Log("delaySound");
         mannequinManager.GetComponent<MannequinManager>().CarFinished();
     }
 }

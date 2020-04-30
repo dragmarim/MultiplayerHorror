@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 494}
   m_MaxSize: {x: 18008, y: 14044}
   vertical: 0
-  controlID: 8544
+  controlID: 9687
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 866
     height: 731
-  m_MinSize: {x: 202, y: 444}
-  m_MaxSize: {x: 4002, y: 8044}
+  m_MinSize: {x: 202, y: 422}
+  m_MaxSize: {x: 4002, y: 8022}
   vertical: 1
-  controlID: 8545
+  controlID: 9688
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 8468
+  controlID: 9709
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -415,9 +415,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 10.298525, y: -0.457968, z: 2.8719387}
+    m_Target: {x: -1.8421079, y: 1.5904455, z: 6.59159}
     speed: 2
-    m_Value: {x: 10.298525, y: -0.457968, z: 2.8719387}
+    m_Value: {x: -1.8421079, y: 1.5904455, z: 6.59159}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -446,13 +446,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.094581924, y: -0.71856284, z: 0.100350425, w: -0.6819574}
+    m_Target: {x: -0.0016947866, y: -0.1643781, z: 0.0008413679, w: -0.9866149}
     speed: 2
-    m_Value: {x: 0.09458193, y: 0.71856284, z: -0.100350425, w: 0.6819575}
+    m_Value: {x: -0.0016947867, y: -0.1643781, z: 0.00084136793, w: -0.9866149}
   m_Size:
-    m_Target: 10.829913
+    m_Target: 4.819071
     speed: 2
-    m_Value: 10.829913
+    m_Value: 4.819071
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -648,9 +648,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fc360000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 2cedffff
+      m_SelectedIDs: aa3f0000
+      m_LastClickedID: 16298
+      m_ExpandedIDs: f685ffff0686ffff0c86ffff1686ffff7686ffff8286ffff9a86ffffd2adffffdcadffff3caeffff48aeffff3cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -713,20 +713,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/audio
+    - Assets/Models/manniquin
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/audio
+  - Assets/Models/manniquin
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Lucas\MultiplayerHorror\Horror Coop Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 7}
-    m_SelectedIDs: 28370000
-    m_LastClickedID: 14120
-    m_ExpandedIDs: 0000000092330000b6330000fe330000f23500004c390000b0390000a23a0000043b00003c3c00006a3c0000203d00000443000000ca9a3b
+    scrollPos: {x: 0, y: 133}
+    m_SelectedIDs: 1c300000
+    m_LastClickedID: 12316
+    m_ExpandedIDs: 00000000e82d00000c2e0000542e000056300000be330000223400001435000076350000be360000ec360000a2370000a23d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -754,7 +754,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000092330000fe330000f23500004c390000b0390000a23a0000043b00003c3c00006a3c0000203d00000443000000ca9a3b
+    m_ExpandedIDs: 00000000e82d00000c2e0000542e000056300000be330000223400001435000076350000be360000ec360000a2370000a23d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300002a3500005e3b0000083f0000aa3f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -806,7 +806,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 137}
+    m_ScrollPosition: {x: 0, y: 25}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 123

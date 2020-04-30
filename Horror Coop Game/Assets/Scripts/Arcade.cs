@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Arcade : MonoBehaviour
 {
+    public GameObject mannequinManager;
     public GameObject player;
     public bool arcadeOn = false;
+    public float arcadeOnTimer;
+    public float requiredTimeForArcadeOn;
+    public bool hasDemanded = false;
 
     public GameObject blackScreen;
     public GameObject afterScape;
@@ -13,9 +17,22 @@ public class Arcade : MonoBehaviour
     public GameObject climb;
     public GameObject rubber;
 
+    void Update() {
+        if (arcadeOn) {
+            arcadeOnTimer += Time.deltaTime;
+            if (arcadeOnTimer >= requiredTimeForArcadeOn && !hasDemanded) {
+                hasDemanded = true;
+                mannequinManager.GetComponent<MannequinManager>().DemandTurnArcadeOff();
+            }
+        }
+    }
+
     void OnMouseDown() {
         if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject) {
             if (!arcadeOn) {
+                mannequinManager.GetComponent<MannequinManager>().TurnedOnArcade();
+                hasDemanded = false;
+                arcadeOnTimer = 0;
                 arcadeOn = true;
                 this.name = "Turn Off Arcade";
                 Random.seed = (int)System.DateTime.Now.Ticks;
@@ -33,6 +50,11 @@ public class Arcade : MonoBehaviour
                     }
                 }
             } else {
+                if (hasDemanded) {
+                    mannequinManager.GetComponent<MannequinManager>().DoneWithArcade();
+                } else {
+                    mannequinManager.GetComponent<MannequinManager>().FailedArcade();
+                }
                 arcadeOn = false;
                 this.name = "Turn On Arcade";
                 blackScreen.SetActive(true);

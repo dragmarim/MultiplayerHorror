@@ -291,6 +291,7 @@ public class BasicPlayerMovement : MonoBehaviour
 
 	IEnumerator Sitting() {
 		isWalking = false;
+		anim.SetBool ("Walking", false);
 		counter = 0;
 		moveTowardsCouch = true;
 		cam.GetComponent<MouseLook>().enabled = false;
@@ -322,11 +323,12 @@ public class BasicPlayerMovement : MonoBehaviour
 	}
 
 	IEnumerator WindingUpCar() {
-		isWalking = false;
 		counter = 0;
 		moveTowardsCar = true;
 		cam.GetComponent<MouseLook>().enabled = false;
 		GetComponent<CapsuleCollider>().enabled = false;
+		anim.SetBool ("Walking", false);
+		isWalking = false;
 		yield return new WaitForSeconds(0.7f);
 		moveTowardsCar = false;
 		car.GetComponent<Drive>().PowerUpCar();
