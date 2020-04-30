@@ -35,7 +35,7 @@ public class Arcade : MonoBehaviour
                 arcadeOnTimer = 0;
                 arcadeOn = true;
                 this.name = "Turn Off Arcade";
-                Random.seed = (int)System.DateTime.Now.Ticks;
+                Random.InitState((int)System.DateTime.Now.Ticks);
                 if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject) {
                     int rand = Random.Range(1, 5);
                     blackScreen.SetActive(false);
@@ -64,5 +64,15 @@ public class Arcade : MonoBehaviour
                 rubber.SetActive(false);
             }
         }
+    }
+
+    public void ShutDown() {
+        arcadeOn = false;
+        this.name = "Turn On Arcade";
+        blackScreen.SetActive(true);
+        afterScape.SetActive(false);
+        apeKing.SetActive(false);
+        climb.SetActive(false);
+        rubber.SetActive(false);
     }
 }

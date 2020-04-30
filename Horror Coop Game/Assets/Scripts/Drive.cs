@@ -19,6 +19,7 @@ public class Drive : MonoBehaviour
     float counter = 0;
     public float newRot = 0;
     public bool stoppedSound = true;
+    public bool success = false;
 
     void FixedUpdate()
     {
@@ -51,7 +52,8 @@ public class Drive : MonoBehaviour
     }
 
     void OnMouseDown() {
-        if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject) {
+        if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject && !currentlyWinding) {
+            success = true;
             this.transform.tag = "Untagged";
             player.GetComponent<BasicPlayerMovement>().WindUpCar();
             currentlyWinding = true;
@@ -108,6 +110,7 @@ public class Drive : MonoBehaviour
         GetComponent<AudioSource>().clip = windCarSound;
         GetComponent<AudioSource>().Play();
         stoppedSound = false;
+        currentlyWinding = false;
     }
 
     IEnumerator ShortDelay() {
