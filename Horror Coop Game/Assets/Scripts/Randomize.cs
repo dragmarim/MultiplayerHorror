@@ -20,10 +20,25 @@ public class Randomize : MonoBehaviour
     public List<int> playerOrder = new List<int>();
     List<int> runesAvailable = new List<int>();
     public List<int> runeOrder = new List<int>();
+    public int currentRune = 0;
+
+    public bool active = false;
+    public float shortButtonCooldownWait = 0;
+    public float longButtonCooldownWait = 0;
+    public GameObject greenLight;
+    public GameObject redLight;
+
+    public float counter = 0;
+    public int lightStage = 0;
+    public float timeToTurnOn = 0;
+    public float timeToStayOff = 0;
 
     public int currentSequenceIndex = 0;
 
+    public GameObject[] runes;
+
     void Start() {
+        StartCoroutine(ShortButtonCooldown());
         Random.InitState(seed);
 
         for (int i = 0; i < 8; i++) {
@@ -72,6 +87,34 @@ public class Randomize : MonoBehaviour
         }
     }
 
+    void Update() {
+        counter += Time.deltaTime;
+        if (lightStage == 0) {
+            Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+            tmp.a += 0.01f;
+            runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+            if (counter >= timeToTurnOn) {
+                counter = 0;
+                lightStage = 1;
+            }
+        } else if (lightStage == 1) {
+            Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+            tmp.a -= 0.01f;
+            if (tmp.a >= 0.117f) {
+                runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+            }
+            if (counter >= timeToTurnOn) {
+                counter = 0;
+                lightStage = 2;
+            }
+        } else {
+            if (counter >= timeToStayOff) {
+                counter = 0;
+                lightStage = 0;
+            }
+        }
+    }
+
     public void StartGame() {
         if (randomSeedObject.GetComponent<Text>().text != "") {
             seed = int.Parse(randomSeedObject.GetComponent<Text>().text);
@@ -93,5 +136,36 @@ public class Randomize : MonoBehaviour
         } else {
             Debug.Log("Died");
         }
+    }
+
+    public void ButtonPress(int buttonId, GameObject button) {
+        if (buttonId == runeOrder[currentRune]) {
+            Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.117f;
+            runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+            lightStage = 0;
+            counter = 0;
+            currentRune += 1;
+            button.GetComponent<ButtonPress>().SuccessfulPress();
+        } else {
+            greenLight.SetActive(false);
+            redLight.SetActive(true);
+            active = false;
+            StartCoroutine(LongButtonCooldown());
+        }
+    }
+
+    IEnumerator ShortButtonCooldown() {
+        yield return new WaitForSeconds(shortButtonCooldownWait);
+        active = true;
+        greenLight.SetActive(true);
+        redLight.SetActive(false);
+    }
+
+    IEnumerator LongButtonCooldown() {
+        yield return new WaitForSeconds(longButtonCooldownWait);
+        active = true;
+        greenLight.SetActive(true);
+        redLight.SetActive(false);
     }
 }
