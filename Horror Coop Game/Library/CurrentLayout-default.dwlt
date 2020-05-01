@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 0
-    y: 43.2
+    x: 8
+    y: 51
     width: 1536
-    height: 780.8
+    height: 781
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 494}
   m_MaxSize: {x: 18008, y: 14044}
   vertical: 0
-  controlID: 31
+  controlID: 55
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 76
+  controlID: 112
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -319,8 +319,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 464
+    x: 8
+    y: 472
     width: 866
     height: 321
   m_ViewDataDictionary: {fileID: 0}
@@ -335,17 +335,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -346.4
-    m_HBaseRangeMax: 346.4
-    m_VBaseRangeMin: -121.6
-    m_VBaseRangeMax: 121.6
+    m_HBaseRangeMin: -433
+    m_HBaseRangeMax: 433
+    m_VBaseRangeMin: -152
+    m_VBaseRangeMax: 152
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
+    m_HSlider: 1
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 1082.5, y: 401.25}
+  m_LastWindowPixelSize: {x: 866, y: 321}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -400,8 +400,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 73.6
+    x: 8
+    y: 81
     width: 866
     height: 372
   m_ViewDataDictionary: {fileID: 0}
@@ -415,9 +415,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.95516527, y: 1.3061581, z: 5.946914}
+    m_Target: {x: 0.7442858, y: 1.3435745, z: -1.5842166}
     speed: 2
-    m_Value: {x: -0.9551652, y: 1.3061582, z: 5.9469137}
+    m_Value: {x: 0.7442858, y: 1.3435745, z: -1.5842166}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -446,13 +446,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.0029242025, y: -0.53355277, z: 0.00044375306, w: 0.84608865}
+    m_Target: {x: 0.0010204222, y: -0.94279045, z: -0.00067012076, w: 0.3342167}
     speed: 2
-    m_Value: {x: -0.0029242025, y: 0.53355277, z: -0.00044375306, w: -0.8460886}
+    m_Value: {x: 0.0010191326, y: -0.94202614, z: -0.00067146396, w: 0.33553725}
   m_Size:
     m_Target: 6.2326474
     speed: 2
-    m_Value: 6.232647
+    m_Value: 6.2326474
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -640,31 +640,31 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 866.4
-    y: 73.6
+    x: 874
+    y: 81
     width: 317
     height: 362
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e0420000
-      m_LastClickedID: 17120
-      m_ExpandedIDs: 6cfbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 4814ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Angry
-        m_OriginalName: Angry
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 17802
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -695,8 +695,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 866.4
-    y: 454.4
+    x: 874
+    y: 462
     width: 317
     height: 331
   m_ViewDataDictionary: {fileID: 0}
@@ -719,14 +719,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\Lucas\MultiplayerHorror\Horror Coop Game
+  m_LastProjectPath: C:\Users\masse\MultiplayerHorror\Horror Coop Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 69}
-    m_SelectedIDs: ea2d0000
-    m_LastClickedID: 11754
-    m_ExpandedIDs: 00000000ea2d0000562e000058300000c233000026340000183500007a350000c0360000ee360000a4370000a63d000000ca9a3b
+    m_SelectedIDs: b8740000
+    m_LastClickedID: 29880
+    m_ExpandedIDs: 00000000b8740000f6740000f275000080770000b07700002278000054780000e2780000f67800002a790000747b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -754,7 +754,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea2d0000562e000058300000c233000026340000183500007a350000c0360000ee360000a4370000a63d0000
+    m_ExpandedIDs: 00000000b8740000f6740000f275000080770000b07700002278000054780000e2780000f67800002a790000747b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -831,8 +831,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1184.8
-    y: 73.6
+    x: 1193
+    y: 81
     width: 349
     height: 712
   m_ViewDataDictionary: {fileID: 0}
