@@ -9,12 +9,15 @@ public class ButtonPress : MonoBehaviour
     public GameObject runeMat;
     public int buttonId;
     public bool completedButton = false;
+    public AudioClip buttonPress;
+    public AudioClip buttonFailedToPress;
 
     void OnMouseDown() {
         if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject && gameManager.GetComponent<Randomize>().active && !completedButton) {
+            AudioSource.PlayClipAtPoint(buttonPress, transform.position);
             gameManager.GetComponent<Randomize>().ButtonPress(buttonId, this.gameObject);
         } else if (player.GetComponent<BasicPlayerMovement>().lookingAt) {
-            Debug.Log("Button not active");
+            AudioSource.PlayClipAtPoint(buttonFailedToPress, transform.position);
         }
     }
 
