@@ -50,6 +50,8 @@ public class BasicPlayerMovement : MonoBehaviour
 	public bool crawlOutOfHiding;
 	public bool standOutOfHiding;
 
+	public bool lookAtSpider = false;
+
 	public float counter = 0;
 
 	void Start () {
@@ -130,6 +132,9 @@ public class BasicPlayerMovement : MonoBehaviour
 			transform.position = Vector3.Lerp(transform.position, new Vector3(3.76f, 0, -4.3f), counter / 1.5f);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 182, 0), 4 * Time.deltaTime);
 			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(6, 0, 0), 4 * Time.deltaTime);
+		}
+		if (lookAtSpider) {
+			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(-90, cam.transform.localRotation.y, cam.transform.localRotation.z), counter / 0.4f);
 		}
 	}
 
@@ -241,11 +246,13 @@ public class BasicPlayerMovement : MonoBehaviour
 	}
 
 	public void DieFromSpider() {
+		counter = 0;
+		lookAtSpider = true;
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
 		//GetComponent<MouseLook>().enabled = false;
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		cam.transform.eulerAngles = new Vector3(-90, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+		//cam.transform.eulerAngles = new Vector3(-90, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 	}
 
 	public void DieFromMannequin() {

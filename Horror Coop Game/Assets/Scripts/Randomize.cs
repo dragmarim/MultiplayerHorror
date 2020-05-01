@@ -25,20 +25,28 @@ public class Randomize : MonoBehaviour
     public bool active = false;
     public float shortButtonCooldownWait = 0;
     public float longButtonCooldownWait = 0;
+    public float startButtonCooldownWait = 0;
     public GameObject greenLight;
     public GameObject redLight;
+    public GameObject yellowLight;
+    public GameObject blackLight;
 
     public float counter = 0;
     public int lightStage = 0;
     public float timeToTurnOn = 0;
     public float timeToStayOff = 0;
+    public AudioClip buttonSuccess;
+    public AudioClip buttonFailed;
 
     public int currentSequenceIndex = 0;
 
     public GameObject[] runes;
 
+    public int buttonId;
+    public GameObject button;
+
     void Start() {
-        StartCoroutine(ShortButtonCooldown());
+        StartCoroutine(StartButtonCooldown());
         Random.InitState(seed);
 
         for (int i = 0; i < 8; i++) {
@@ -138,8 +146,53 @@ public class Randomize : MonoBehaviour
         }
     }
 
-    public void ButtonPress(int buttonId, GameObject button) {
+    public void ButtonPress(int butID, GameObject currentButton) {
+        active = false;
+        buttonId = butID;
+        button = currentButton;
+        StartCoroutine(Processing());
+    }
+
+    IEnumerator StartButtonCooldown() {
+        yield return new WaitForSeconds(startButtonCooldownWait);
+        active = true;
+        greenLight.SetActive(true);
+        blackLight.SetActive(false);
+    }
+
+    IEnumerator ShortButtonCooldown() {
+        greenLight.SetActive(true);
+        yield return new WaitForSeconds(1);
+        greenLight.SetActive(false);
+        blackLight.SetActive(true);
+        yield return new WaitForSeconds(shortButtonCooldownWait);
+        active = true;
+        greenLight.SetActive(true);
+        blackLight.SetActive(false);
+    }
+
+    IEnumerator LongButtonCooldown() {
+        redLight.SetActive(true);
+        yield return new WaitForSeconds(longButtonCooldownWait);
+        active = true;
+        greenLight.SetActive(true);
+        redLight.SetActive(false);
+    }
+
+    IEnumerator Processing() {
+        greenLight.SetActive(false);
+        for (int i = 0; i < 5; i++) {
+            blackLight.SetActive(false);
+            yellowLight.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            blackLight.SetActive(true);
+            yellowLight.SetActive(false);
+            yield return new WaitForSeconds(0.3f);
+        }
+        blackLight.SetActive(false);
         if (buttonId == runeOrder[currentRune]) {
+            button.GetComponent<AudioSource>().clip = buttonSuccess;
+            button.GetComponent<AudioSource>().Play();
             Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
             tmp.a = 0.117f;
             runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
@@ -147,25 +200,11 @@ public class Randomize : MonoBehaviour
             counter = 0;
             currentRune += 1;
             button.GetComponent<ButtonPress>().SuccessfulPress();
+            StartCoroutine(ShortButtonCooldown());
         } else {
-            greenLight.SetActive(false);
-            redLight.SetActive(true);
-            active = false;
+            button.GetComponent<AudioSource>().clip = buttonFailed;
+            button.GetComponent<AudioSource>().Play();
             StartCoroutine(LongButtonCooldown());
         }
-    }
-
-    IEnumerator ShortButtonCooldown() {
-        yield return new WaitForSeconds(shortButtonCooldownWait);
-        active = true;
-        greenLight.SetActive(true);
-        redLight.SetActive(false);
-    }
-
-    IEnumerator LongButtonCooldown() {
-        yield return new WaitForSeconds(longButtonCooldownWait);
-        active = true;
-        greenLight.SetActive(true);
-        redLight.SetActive(false);
     }
 }
