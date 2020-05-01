@@ -248,6 +248,14 @@ public class BasicPlayerMovement : MonoBehaviour
 		cam.transform.eulerAngles = new Vector3(-90, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 	}
 
+	public void DieFromMannequin() {
+		isActive = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		//GetComponent<MouseLook>().enabled = false;
+		cam.transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+	}
+
+
 	IEnumerator Hiding() {
 		moveTowardsHiding = true;
 		cam.GetComponent<MouseLook>().enabled = false;

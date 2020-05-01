@@ -15,6 +15,7 @@ public class MannequinManager : MonoBehaviour
     public bool isActive = false;
     public bool awayFromStand = false;
     public float maxIgnoreTime = 0;
+    public GameObject blackout;
     
     public GameObject mannequinIdle;
     public GameObject mannequinAngry;
@@ -22,14 +23,21 @@ public class MannequinManager : MonoBehaviour
     public GameObject mannequinPoint;
     public GameObject mannequinWantToPlay;
     public GameObject mannequinWantArcadeOff;
+    public GameObject mannequinJumpscare;
     public GameObject couch;
     public GameObject car;
     public GameObject arcade;
     public bool isSitting;
     public bool isAngry;
     public bool waitingOnArcade = false;
+    public AudioClip mannequinJumpscareClip;
+
+    bool moveTowardsPlayer = false;
 
     void Update() {
+        if (moveTowardsPlayer) {
+            mannequinJumpscare.transform.position = Vector3.Lerp(mannequinJumpscare.transform.position, player.transform.position, currentTime / 40);
+        }
         if (!player.GetComponent<BasicPlayerMovement>().isSitting) {
             currentTime += Time.deltaTime;
         }
@@ -63,12 +71,16 @@ public class MannequinManager : MonoBehaviour
             }
         }
         if (isActive && currentTime >= maxIgnoreTime) {
-            if (!isAngry && !car.GetComponent<Drive>().success && !player.GetComponent<BasicPlayerMovement>().isSitting && !waitingOnArcade) {
-                isAngry = true;
-                isActive = false;
-                mannequinAngry.SetActive(true);
+            if (!car.GetComponent<Drive>().success && !player.GetComponent<BasicPlayerMovement>().isSitting && !waitingOnArcade) {
+                if (!isAngry) {
+                    isAngry = true;
+                    mannequinAngry.SetActive(true);
+                    awayFromStand = false;
+                    isActive = false;
+                } else {
+                    TriggerJumpscare();
+                }
                 currentTime = 0;
-                awayFromStand = false;
                 if (couch.transform.tag == "Rune") {
                     AudioSource.PlayClipAtPoint(poofOut, mannequinSitting.transform.position, 0.3f);
                     mannequinSitting.SetActive(false);
@@ -83,10 +95,21 @@ public class MannequinManager : MonoBehaviour
                     arcade.GetComponent<Arcade>().ShutDown();
                     arcade.transform.tag = "Untagged";
                 }
-            } else if (!car.GetComponent<Drive>().success && !player.GetComponent<BasicPlayerMovement>().isSitting && !waitingOnArcade) {
-
             }
         }
+    }
+
+    public void TriggerJumpscare() {
+        moveTowardsPlayer = true;
+        player.GetComponent<BasicPlayerMovement>().DieFromMannequin();
+        mannequinJumpscare.SetActive(true);
+        mannequinJumpscare.transform.position = player.transform.position + player.transform.forward;
+        mannequinJumpscare.transform.LookAt(player.transform.position);
+        mannequinJumpscare.transform.eulerAngles = new Vector3(0, mannequinJumpscare.transform.eulerAngles.y, mannequinJumpscare.transform.eulerAngles.z);
+        player.GetComponent<AudioSource>().clip = mannequinJumpscareClip;
+        player.GetComponent<AudioSource>().Play();
+        StartCoroutine(EndOfJumpscare());
+        currentTime = 0;
     }
 
     public void NoLongerSitting() {
@@ -146,11 +169,12 @@ public class MannequinManager : MonoBehaviour
     }
 
     public void FailedArcade() {
+        waitingOnArcade = false;
         if (!isAngry) {
             isAngry = true;
             mannequinAngry.SetActive(true);
         } else {
-            
+            TriggerJumpscare();
         }
         arcade.transform.tag = "Untagged";
         AudioSource.PlayClipAtPoint(poofOut, mannequinWantToPlay.transform.position, 0.3f);
@@ -158,5 +182,12 @@ public class MannequinManager : MonoBehaviour
         isActive = false;
         awayFromStand = false;
         currentTime = 0;
+    }
+
+    IEnumerator EndOfJumpscare() {
+        yield return new WaitForSeconds(0.9f);
+        blackout.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        player.GetComponent<AudioSource>().Stop();
     }
 }
