@@ -31,6 +31,8 @@ public class SpiderCooldown : MonoBehaviour
     float timeLeftUntilUnscrew;
     public float remainingScrews;
 
+    public bool currentlyActive = false;
+
     public AudioClip bangOnVent;
     public AudioClip spiderWalking;
     public AudioClip spiderWalking2;
@@ -49,7 +51,7 @@ public class SpiderCooldown : MonoBehaviour
         aud = GetComponent<AudioSource>();
         nothingInVentTimer = Random.Range(nothingInVentTimerDefaultMin, nothingInVentTimerDefaultMax);
         spiderApproachingVentTimer = Random.Range(spiderApproachingVentTimerDefaultMin, spiderApproachingVentTimerDefaultMax);
-        StartCoroutine(Countdown());
+        //StartCoroutine(Countdown());
     }
 
     void Update() {
@@ -68,6 +70,11 @@ public class SpiderCooldown : MonoBehaviour
                 blackout.SetActive(true);
             }
         }
+    }
+
+    public void StartCountdown() {
+        currentlyActive = true;
+        StartCoroutine(Countdown());
     }
 
     IEnumerator Countdown() {
@@ -134,7 +141,7 @@ public class SpiderCooldown : MonoBehaviour
     }
 
     void OnMouseDown() {
-        if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject && !bangOnVentOnCooldown) {
+        if (player.GetComponent<BasicPlayerMovement>().lookingAt == this.gameObject && !bangOnVentOnCooldown && currentlyActive) {
             bangOnVentOnCooldown = true;
             StartCoroutine(startCooldown());
             AudioSource.PlayClipAtPoint(bangOnVent, transform.position);

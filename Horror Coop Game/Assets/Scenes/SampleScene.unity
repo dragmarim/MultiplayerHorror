@@ -3733,7 +3733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &315944195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3752,12 +3752,12 @@ MonoBehaviour:
   delayBeforeActive: 4
   delayBeforeActiveMin: 4
   delayBeforeActiveMax: 13
-  delayBeforeLeaving: 10
-  delayBeforeLeavingMin: 25
+  delayBeforeLeaving: 26
+  delayBeforeLeavingMin: 40
   delayBeforeLeavingMax: 0
   isActive: 0
   awayFromStand: 0
-  maxIgnoreTime: 8
+  maxIgnoreTime: 9
   blackout: {fileID: 1423739784}
   mannequinIdle: {fileID: 829522434}
   mannequinAngry: {fileID: 2051141867}
@@ -4224,7 +4224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 5a97962f7d5ba4df0823334b52c7c02c, type: 3}
       propertyPath: SizeBySpeedModule.enabled
@@ -4410,7 +4410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0044ae121570bd43807fa67153829a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 2
   mask: {fileID: 8296172667653548217}
 --- !u!4 &343863857 stripped
 Transform:
@@ -8146,9 +8146,9 @@ MonoBehaviour:
   runeOrder: 
   currentRune: 0
   active: 0
-  shortButtonCooldownWait: 1
-  longButtonCooldownWait: 2
-  startButtonCooldownWait: 2
+  shortButtonCooldownWait: 10
+  longButtonCooldownWait: 20
+  startButtonCooldownWait: 15
   greenLight: {fileID: 1944072040}
   redLight: {fileID: 1276609000}
   yellowLight: {fileID: 1112790991}
@@ -8173,6 +8173,8 @@ MonoBehaviour:
   button: {fileID: 0}
   victory: 0
   door: {fileID: 624803644}
+  vent: {fileID: 1686841545}
+  mannequin: {fileID: 315944194}
 --- !u!4 &738977909
 Transform:
   m_ObjectHideFlags: 0
@@ -19525,14 +19527,15 @@ MonoBehaviour:
   waitForFlicker: 0
   spiderLeftVent: 0
   waited: 0
-  nothingInVentTimerDefaultMin: 7
-  nothingInVentTimerDefaultMax: 18
+  nothingInVentTimerDefaultMin: 13
+  nothingInVentTimerDefaultMax: 24
   nothingInVentTimer: 0
-  spiderApproachingVentTimerDefaultMin: 2
-  spiderApproachingVentTimerDefaultMax: 6
+  spiderApproachingVentTimerDefaultMin: 6
+  spiderApproachingVentTimerDefaultMax: 12
   spiderApproachingVentTimer: 0
-  timeToUnscrew: 4
+  timeToUnscrew: 5
   remainingScrews: 3
+  currentlyActive: 0
   bangOnVent: {fileID: 8300000, guid: 36c74b73fb11e57479de5131e0cb74a6, type: 3}
   spiderWalking: {fileID: 8300000, guid: 041d3d03255f70640a0f650755e668d4, type: 3}
   spiderWalking2: {fileID: 8300000, guid: 12e11259aec653346adfdb651d135143, type: 3}
@@ -20695,6 +20698,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4224801822505238522, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274873701517981592, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
         type: 3}
       propertyPath: m_Controller
@@ -20755,16 +20768,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.8
       objectReference: {fileID: 0}
-    - target: {fileID: 4224801822505238522, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8274873701517981592, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fe37e8a913c0b14da15f2352b16ebf3, type: 3}
 --- !u!1 &1789441384 stripped
@@ -20799,8 +20802,8 @@ MonoBehaviour:
   tooLate: 0
   triggerJumpscare: 0
   blackout: {fileID: 1423739784}
-  crawlStartDelayMin: 5
-  crawlStartDelayMax: 20
+  crawlStartDelayMin: 18
+  crawlStartDelayMax: 32
 --- !u!82 &1789441386
 AudioSource:
   m_ObjectHideFlags: 0

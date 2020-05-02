@@ -124,11 +124,9 @@ public class CrawlTowardHouse : MonoBehaviour
     }
 
     IEnumerator ChangeSpeed() {
-        //crawlSpeed = 1.5f;
-        crawlSpeed = 3;
+        crawlSpeed = 1.5f;
         yield return new WaitForSeconds(0.6165f);
-        //crawlSpeed = 5;
-        crawlSpeed = 10;
+        crawlSpeed = 5;
         yield return new WaitForSeconds(0.2f);
         if (climbingDownHill) {
             StartCoroutine(ChangeSpeed());

@@ -41,6 +41,7 @@ public class MannequinManager : MonoBehaviour
     bool moveTowardsPlayer = false;
 
     void Start() {
+        currentTime = 0;
         delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
     }
 
@@ -91,6 +92,7 @@ public class MannequinManager : MonoBehaviour
                     ParticleAppear(mannequinAngry);
                     AudioSource.PlayClipAtPoint(poofOut, mannequinAngry.transform.position, 0.1f);
                     delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
+                    currentTime = 0;
                     isAngry = true;
                     mannequinAngry.SetActive(true);
                     awayFromStand = false;

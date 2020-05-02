@@ -48,6 +48,9 @@ public class Randomize : MonoBehaviour
     public bool victory = false;
     public GameObject door;
 
+    public GameObject vent;
+    public GameObject mannequin;
+
     void Start() {
         StartCoroutine(StartButtonCooldown());
     }
@@ -207,7 +210,11 @@ public class Randomize : MonoBehaviour
             lightStage = 0;
             counter = 0;
             currentRune += 1;
-            if (currentRune == 8) {
+            if (currentRune == 2) {
+                vent.GetComponent<SpiderCooldown>().StartCountdown();
+            } else if (currentRune == 4) {
+                mannequin.SetActive(true);
+            } else if (currentRune == 8) {
                 victory = true;
                 door.transform.tag = "Rune";
             }
