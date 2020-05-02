@@ -24,7 +24,7 @@ public class SpawnMaskOverTime : MonoBehaviour
         emissionModule.rateOverTime = rate;
         for (int i = 0; i < 50; i++) {
             yield return new WaitForSeconds(delay);
-            rate += 1;
+            rate += i/15;
             emissionModule.rateOverTime = rate;
         }
         emissionModule.rateOverTime = 0;

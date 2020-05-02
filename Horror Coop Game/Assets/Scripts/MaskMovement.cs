@@ -32,7 +32,7 @@ public class MaskMovement : MonoBehaviour
     }
 
     void Update() {
-        if (!player.GetComponent<BasicPlayerMovement>().isHiding && willAttack && !isActive) {
+        if (!player.GetComponent<BasicPlayerMovement>().isHiding && willAttack && !isActive && player.GetComponent<BasicPlayerMovement>().canBeJumpscared) {
             GetComponentInChildren<Float>().enabled = false;
             isActive = true;
             player.GetComponent<BasicPlayerMovement>().DieFromMask(this.gameObject);
@@ -42,13 +42,13 @@ public class MaskMovement : MonoBehaviour
 			transform.position = Vector3.Lerp(transform.position, new Vector3(5, 2, 5), 1 * Time.deltaTime);
 		}
         if (floatAcrossRoomForward && !isActive) {
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(-3, 2, 1), 1 * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(-3, 2, 1), 2 * Time.deltaTime);
 		}
         if (turnAround && !isActive) {
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 160, 0), 1 * Time.deltaTime);
 		}
         if (floatAcrossRoomBackward && !isActive) {
-			transform.position = Vector3.MoveTowards(transform.position, new Vector3(5, 2, 5), 1 * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, new Vector3(5, 2, 5), 2 * Time.deltaTime);
 		}
         if (floatDownToSpawn && !isActive) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(5, 0.5f, 5), 1 * Time.deltaTime);
@@ -64,13 +64,13 @@ public class MaskMovement : MonoBehaviour
         floatUpFromSpawn = false;
         willAttack = true;
         floatAcrossRoomForward = true;
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(4.5f);
         floatAcrossRoomForward = false;
         turnAround = true;
         yield return new WaitForSeconds(4);
         turnAround = false;
         floatAcrossRoomBackward = true;
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(4.5f);
         floatAcrossRoomBackward = false;
         floatDownToSpawn = true;
         yield return new WaitForSeconds(1.5f);

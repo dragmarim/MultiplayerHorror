@@ -51,6 +51,8 @@ public class BasicPlayerMovement : MonoBehaviour
 	public bool standOutOfHiding;
 
 	public bool lookAtSpider = false;
+	public bool lookAtRoadKill = false;
+	public bool canBeJumpscared = true;
 
 	public float counter = 0;
 
@@ -74,6 +76,7 @@ public class BasicPlayerMovement : MonoBehaviour
 	}
 
 	void Update() {
+		counter += Time.deltaTime;
 		if (doneSitting) {
 			timeSpentSitting += Time.deltaTime;
 			if (timeSpentSitting >= timeRequiredToSit && mannequinManager.GetComponent<MannequinManager>().isSitting) {
@@ -113,7 +116,6 @@ public class BasicPlayerMovement : MonoBehaviour
 		if (standOutOfHiding) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(-5.5f, 0, 3), 6 * Time.deltaTime);
 		}
-		counter += Time.deltaTime;
 		if (moveTowardsCouch) {
 			transform.position = Vector3.Lerp(transform.position, new Vector3(2, 0, 3), counter / 6);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -130, 0), counter / 3);
@@ -135,6 +137,9 @@ public class BasicPlayerMovement : MonoBehaviour
 		}
 		if (lookAtSpider) {
 			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(-90, cam.transform.localRotation.y, cam.transform.localRotation.z), counter / 0.4f);
+		}
+		if (lookAtRoadKill) {
+			cam.transform.localRotation = Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(-30, cam.transform.localRotation.y, cam.transform.localRotation.z), counter / 0.05f);
 		}
 	}
 
@@ -216,7 +221,6 @@ public class BasicPlayerMovement : MonoBehaviour
 
 	public void SitDown() {
 		if (!isSitting) {
-			isActive = true;
 			targetName.GetComponent<Text>().text = "";
 			isSitting = true;
 			doneSitting = false;
@@ -238,30 +242,45 @@ public class BasicPlayerMovement : MonoBehaviour
 	}
 
 	public void DieFromMask(GameObject mask) {
+		canBeJumpscared = false;
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		//GetComponent<MouseLook>().enabled = false;
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 		cam.transform.LookAt(new Vector3(mask.transform.position.x, 0.7f, mask.transform.position.z));
+		isWalking = false;
+		anim.SetBool ("Walking", false);
+
 	}
 
 	public void DieFromSpider() {
+		canBeJumpscared = false;
 		counter = 0;
 		lookAtSpider = true;
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		//GetComponent<MouseLook>().enabled = false;
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		//cam.transform.eulerAngles = new Vector3(-90, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+		isWalking = false;
+		anim.SetBool ("Walking", false);
 	}
 
 	public void DieFromMannequin() {
+		canBeJumpscared = false;
 		isActive = true;
 		cam.GetComponent<MouseLook>().enabled = false;
-		//GetComponent<MouseLook>().enabled = false;
 		cam.transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+		isWalking = false;
+		anim.SetBool ("Walking", false);
 	}
 
+	public void DieFromRoadKill() {
+		canBeJumpscared = false;
+		counter = 0;
+		lookAtRoadKill = true;
+		isActive = true;
+		cam.GetComponent<MouseLook>().enabled = false;
+		isWalking = false;
+		anim.SetBool ("Walking", false);
+	}
 
 	IEnumerator Hiding() {
 		moveTowardsHiding = true;

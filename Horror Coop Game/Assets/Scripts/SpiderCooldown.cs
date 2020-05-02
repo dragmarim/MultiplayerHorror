@@ -21,13 +21,15 @@ public class SpiderCooldown : MonoBehaviour
     public bool spiderLeftVent;
     public bool waited;
 
-    public int nothingInVentTimerDefault;
-    int nothingInVentTimer;
-    public int spiderApproachingVentTimerDefault;
-    int spiderApproachingVentTimer;
-    public int timeToUnscrew;
-    int timeLeftUntilUnscrew;
-    public int remainingScrews;
+    public float nothingInVentTimerDefaultMin;
+    public float nothingInVentTimerDefaultMax;
+    public float nothingInVentTimer;
+    public float spiderApproachingVentTimerDefaultMin;
+    public float spiderApproachingVentTimerDefaultMax;
+    public float spiderApproachingVentTimer;
+    public float timeToUnscrew;
+    float timeLeftUntilUnscrew;
+    public float remainingScrews;
 
     public AudioClip bangOnVent;
     public AudioClip spiderWalking;
@@ -45,13 +47,13 @@ public class SpiderCooldown : MonoBehaviour
         spiderLeftVent = false;
         spiderIsVisible = false;
         aud = GetComponent<AudioSource>();
-        nothingInVentTimer = nothingInVentTimerDefault;
-        spiderApproachingVentTimer = spiderApproachingVentTimerDefault;
+        nothingInVentTimer = Random.Range(nothingInVentTimerDefaultMin, nothingInVentTimerDefaultMax);
+        spiderApproachingVentTimer = Random.Range(spiderApproachingVentTimerDefaultMin, spiderApproachingVentTimerDefaultMax);
         StartCoroutine(Countdown());
     }
 
     void Update() {
-        if (canFall) {
+        if (canFall && !player.GetComponent<BasicPlayerMovement>().isHiding) {
             if (!startFalling) {
                 jumpscareSpider.GetComponent<AudioSource>().Play();
                 startFalling = true;
@@ -73,15 +75,15 @@ public class SpiderCooldown : MonoBehaviour
             waitForFlicker = false;
             waited = true;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         if (nothingInVentTimer > 0) {
             if (spiderIsVisible && ventLight.GetComponent<Flicker>().lightIsOff) {
                 spiderIsVisible = false;
                 spider.SetActive(false);
                 Debug.Log("spider invisible");
             }
-            nothingInVentTimer -= 1;
-            if (nothingInVentTimer == 0) {
+            nothingInVentTimer -= 0.1f;
+            if (nothingInVentTimer <= 0) {
                 //aud.clip = spiderWalking;
                 int rand = Random.Range(1, 3);
                 if (rand == 1) {
@@ -91,8 +93,8 @@ public class SpiderCooldown : MonoBehaviour
                 }
             }
         } else if (spiderApproachingVentTimer > 0) {
-            spiderApproachingVentTimer -= 1;
-            if (spiderApproachingVentTimer == 0) {
+            spiderApproachingVentTimer -= 0.1f;
+            if (spiderApproachingVentTimer <= 0) {
                 timeLeftUntilUnscrew = timeToUnscrew;
             }
         } else {
@@ -101,7 +103,7 @@ public class SpiderCooldown : MonoBehaviour
                 spider.SetActive(true);
                 Debug.Log("spider now visible");
             }
-            timeLeftUntilUnscrew -= 1;
+            timeLeftUntilUnscrew -= 0.1f;
             if (timeLeftUntilUnscrew <= 0 && ventLight.GetComponent<Flicker>().lightIsOff && !spiderLeftVent) {
                 //aud.clip = screwFalling;
                 if (!waitForFlicker && !waited) {
@@ -136,9 +138,9 @@ public class SpiderCooldown : MonoBehaviour
             bangOnVentOnCooldown = true;
             StartCoroutine(startCooldown());
             AudioSource.PlayClipAtPoint(bangOnVent, transform.position);
-            if (nothingInVentTimer == 0) {
-                nothingInVentTimer = nothingInVentTimerDefault;
-                spiderApproachingVentTimer = spiderApproachingVentTimerDefault;
+            if (nothingInVentTimer <= 0) {
+                nothingInVentTimer = Random.Range(nothingInVentTimerDefaultMin, nothingInVentTimerDefaultMax);
+                spiderApproachingVentTimer = Random.Range(spiderApproachingVentTimerDefaultMin, spiderApproachingVentTimerDefaultMax);
             }
         }
     }
@@ -149,8 +151,10 @@ public class SpiderCooldown : MonoBehaviour
     }
 
     IEnumerator SpiderJumpscare() {
-        int randomWait = Random.Range(jumpscareWaitMin, jumpscareWaitMax);
-        yield return new WaitForSeconds(randomWait);
-        canFall = true;
+        if (player.GetComponent<BasicPlayerMovement>().canBeJumpscared) {
+            int randomWait = Random.Range(jumpscareWaitMin, jumpscareWaitMax);
+            yield return new WaitForSeconds(randomWait);
+            canFall = true;
+        }
     }
 }

@@ -3733,7 +3733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &315944195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3750,7 +3750,11 @@ MonoBehaviour:
   poofIn: {fileID: 8300000, guid: 8007a2f312600ff42aad85e62523235f, type: 3}
   poofOut: {fileID: 8300000, guid: acafb04497ca16742afeef1a8eb82199, type: 3}
   delayBeforeActive: 4
-  delayBeforeLeaving: 2
+  delayBeforeActiveMin: 4
+  delayBeforeActiveMax: 13
+  delayBeforeLeaving: 10
+  delayBeforeLeavingMin: 25
+  delayBeforeLeavingMax: 0
   isActive: 0
   awayFromStand: 0
   maxIgnoreTime: 5.5
@@ -4405,7 +4409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0044ae121570bd43807fa67153829a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
+  delay: 1
   mask: {fileID: 8296172667653548217}
 --- !u!4 &343863857 stripped
 Transform:
@@ -8104,7 +8108,7 @@ MonoBehaviour:
   playerCountObject: {fileID: 1701328367}
   seed: 1
   localPlayer: 1
-  playerCount: 3
+  playerCount: 1
   playerOrder: 
   runeOrder: 
   currentRune: 0
@@ -9351,7 +9355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &804653646
 Transform:
   m_ObjectHideFlags: 0
@@ -12119,6 +12123,11 @@ MonoBehaviour:
   peeringCrawlBoi: {fileID: 0}
   player: {fileID: 0}
   nextToHouse: 0
+  tooLate: 0
+  triggerJumpscare: 0
+  blackout: {fileID: 0}
+  crawlStartDelayMin: 0
+  crawlStartDelayMax: 0
 --- !u!4 &1070279999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 418214, guid: 2794e48d8bf5c7349b42f50bb23e5e4b,
@@ -18506,7 +18515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 194542, guid: 9cf03dec5e2842b49bb293defe2c1e13, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 446510, guid: 9cf03dec5e2842b49bb293defe2c1e13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19455,8 +19464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead4d6d08fc031c408d5a2d78e03013d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpscareWaitMin: 1
-  jumpscareWaitMax: 1
+  jumpscareWaitMin: 6
+  jumpscareWaitMax: 16
   jumpscareSpider: {fileID: 849003415}
   canFall: 0
   startFalling: 0
@@ -19469,10 +19478,14 @@ MonoBehaviour:
   waitForFlicker: 0
   spiderLeftVent: 0
   waited: 0
-  nothingInVentTimerDefault: 1
-  spiderApproachingVentTimerDefault: 1
-  timeToUnscrew: 1
-  remainingScrews: 2
+  nothingInVentTimerDefaultMin: 7
+  nothingInVentTimerDefaultMax: 18
+  nothingInVentTimer: 0
+  spiderApproachingVentTimerDefaultMin: 2
+  spiderApproachingVentTimerDefaultMax: 6
+  spiderApproachingVentTimer: 0
+  timeToUnscrew: 4
+  remainingScrews: 3
   bangOnVent: {fileID: 8300000, guid: 36c74b73fb11e57479de5131e0cb74a6, type: 3}
   spiderWalking: {fileID: 8300000, guid: 041d3d03255f70640a0f650755e668d4, type: 3}
   spiderWalking2: {fileID: 8300000, guid: 12e11259aec653346adfdb651d135143, type: 3}
@@ -20633,7 +20646,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4224801822505238522, guid: 8fe37e8a913c0b14da15f2352b16ebf3,
         type: 3}
@@ -20736,6 +20749,107 @@ MonoBehaviour:
   peeringCrawlBoi: {fileID: 1052140088}
   player: {fileID: 8296172668005743766}
   nextToHouse: 0
+  tooLate: 0
+  triggerJumpscare: 0
+  blackout: {fileID: 1423739784}
+  crawlStartDelayMin: 5
+  crawlStartDelayMax: 20
+--- !u!82 &1789441386
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789441384}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: da8c6fb76e0afdd49a7d49a3f63b46cd, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1790610725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25922,7 +26036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172667653548217}
   m_LocalRotation: {x: 0, y: 0.8191521, z: -0, w: -0.5735764}
-  m_LocalPosition: {x: 4.65, y: 0.5, z: 4.65}
+  m_LocalPosition: {x: 5, y: 0.5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1276603736067310432}

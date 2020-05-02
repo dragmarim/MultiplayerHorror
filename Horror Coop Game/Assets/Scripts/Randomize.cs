@@ -47,6 +47,50 @@ public class Randomize : MonoBehaviour
 
     void Start() {
         StartCoroutine(StartButtonCooldown());
+    }
+
+    void Update() {
+        if (playerOrder.Count > 0 && playerOrder[currentRune] == localPlayer) {
+            counter += Time.deltaTime;
+            if (lightStage == 0) {
+                Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+                tmp.a += 0.01f;
+                runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+                if (counter >= timeToTurnOn) {
+                    counter = 0;
+                    lightStage = 1;
+                }
+            } else if (lightStage == 1) {
+                Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+                tmp.a -= 0.01f;
+                if (tmp.a >= 0.117f) {
+                    runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+                }
+                if (counter >= timeToTurnOn) {
+                    counter = 0;
+                    lightStage = 2;
+                }
+            } else {
+                if (counter >= timeToStayOff) {
+                    counter = 0;
+                    lightStage = 0;
+                }
+            }
+        }
+    }
+
+    public void StartGame() {
+        if (randomSeedObject.GetComponent<Text>().text != "") {
+            seed = int.Parse(randomSeedObject.GetComponent<Text>().text);
+        } else {
+            seed = 1;
+        }
+        localPlayer = (int)localPlayerObject.GetComponent<Slider>().value;
+        playerCount = (int)playerCountObject.GetComponent<Slider>().value;
+        crosshair.SetActive(true);
+        player.SetActive(true);
+        userInterface.SetActive(false);
+        menuCamera.SetActive(false);
         Random.InitState(seed);
 
         for (int i = 0; i < 8; i++) {
@@ -66,10 +110,11 @@ public class Randomize : MonoBehaviour
             if (currentNumber == 1 && totalCount <= 8 % playerCount) {
                 List<int> tempPlayersAvailable = new List<int>();
                 for (int j = 0; j < playerCount; j++) {
-                    tempPlayersAvailable.Add(j+1);
+                    Debug.Log("player: " + j);
+                    tempPlayersAvailable.Add(j);
                 }
                 while (totalCount > 0) {
-                    int randNum = Random.Range(0, tempPlayersAvailable.Count);
+                    int randNum = Random.Range(0, tempPlayersAvailable.Count+1);
                     playersAvailable.Add(tempPlayersAvailable[randNum]);
                     tempPlayersAvailable.RemoveAt(randNum);
                     totalCount -= 1;
@@ -93,48 +138,6 @@ public class Randomize : MonoBehaviour
             playersAvailable.RemoveAt(random);
             Debug.Log(playerOrder[i]);
         }
-    }
-
-    void Update() {
-        counter += Time.deltaTime;
-        if (lightStage == 0) {
-            Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
-            tmp.a += 0.01f;
-            runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
-            if (counter >= timeToTurnOn) {
-                counter = 0;
-                lightStage = 1;
-            }
-        } else if (lightStage == 1) {
-            Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
-            tmp.a -= 0.01f;
-            if (tmp.a >= 0.117f) {
-                runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
-            }
-            if (counter >= timeToTurnOn) {
-                counter = 0;
-                lightStage = 2;
-            }
-        } else {
-            if (counter >= timeToStayOff) {
-                counter = 0;
-                lightStage = 0;
-            }
-        }
-    }
-
-    public void StartGame() {
-        if (randomSeedObject.GetComponent<Text>().text != "") {
-            seed = int.Parse(randomSeedObject.GetComponent<Text>().text);
-        } else {
-            seed = 1;
-        }
-        localPlayer = (int)localPlayerObject.GetComponent<Slider>().value;
-        playerCount = (int)playerCountObject.GetComponent<Slider>().value;
-        crosshair.SetActive(true);
-        player.SetActive(true);
-        userInterface.SetActive(false);
-        menuCamera.SetActive(false);
     }
 
     public void NextNumber(int runeNumber) {
