@@ -36,6 +36,8 @@ public class MannequinManager : MonoBehaviour
     public bool waitingOnArcade = false;
     public AudioClip mannequinJumpscareClip;
 
+    public GameObject particleCloud;
+
     bool moveTowardsPlayer = false;
 
     void Start() {
@@ -52,6 +54,7 @@ public class MannequinManager : MonoBehaviour
         if (!awayFromStand && currentTime >= delayBeforeLeaving) {
             delayBeforeActive = Random.Range(delayBeforeActiveMin, delayBeforeActiveMax);
             AudioSource.PlayClipAtPoint(poofOut, mannequinIdle.transform.position, 0.1f);
+            ParticleAppear(mannequinIdle);
             awayFromStand = true;
             currentTime = 0;
             mannequinIdle.SetActive(false);
@@ -63,17 +66,20 @@ public class MannequinManager : MonoBehaviour
             Random.InitState((int)System.DateTime.Now.Ticks);
             int rand = Random.Range(1, 4);
             if (rand == 1) {
+                ParticleAppear(mannequinSitting);
                 AudioSource.PlayClipAtPoint(poofIn, mannequinSitting.transform.position, 0.1f);
                 player.GetComponent<BasicPlayerMovement>().timeSpentSitting = 0;
                 isSitting = true;
                 mannequinSitting.SetActive(true);
                 couch.transform.tag = "Rune";
             } else if (rand == 2) {
+                ParticleAppear(mannequinPoint);
                 AudioSource.PlayClipAtPoint(poofIn, mannequinPoint.transform.position, 0.1f);
                 mannequinPoint.SetActive(true);
                 car.GetComponent<Drive>().success = false;
                 car.transform.tag = "Rune";
             } else {
+                ParticleAppear(mannequinWantToPlay);
                 AudioSource.PlayClipAtPoint(poofIn, mannequinWantToPlay.transform.position, 0.1f);
                 mannequinWantToPlay.SetActive(true);
                 arcade.transform.tag = "Rune";
@@ -82,6 +88,8 @@ public class MannequinManager : MonoBehaviour
         if (isActive && currentTime >= maxIgnoreTime) {
             if (!car.GetComponent<Drive>().success && !player.GetComponent<BasicPlayerMovement>().isSitting && !waitingOnArcade) {
                 if (!isAngry) {
+                    ParticleAppear(mannequinAngry);
+                    AudioSource.PlayClipAtPoint(poofOut, mannequinAngry.transform.position, 0.1f);
                     delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
                     isAngry = true;
                     mannequinAngry.SetActive(true);
@@ -92,14 +100,17 @@ public class MannequinManager : MonoBehaviour
                 }
                 currentTime = 0;
                 if (couch.transform.tag == "Rune") {
+                    ParticleAppear(mannequinSitting);
                     AudioSource.PlayClipAtPoint(poofOut, mannequinSitting.transform.position, 0.1f);
                     mannequinSitting.SetActive(false);
                     couch.transform.tag = "Untagged";
                 } else if (car.transform.tag == "Rune") {
+                    ParticleAppear(mannequinPoint);
                     AudioSource.PlayClipAtPoint(poofOut, mannequinPoint.transform.position, 0.1f);
                     mannequinPoint.SetActive(false);
                     car.transform.tag = "Untagged";
                 } else {
+                    ParticleAppear(mannequinWantToPlay);
                     AudioSource.PlayClipAtPoint(poofOut, mannequinWantToPlay.transform.position, 0.1f);
                     mannequinWantToPlay.SetActive(false);
                     arcade.GetComponent<Arcade>().ShutDown();
@@ -107,6 +118,12 @@ public class MannequinManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ParticleAppear(GameObject target) {
+        particleCloud.transform.position = target.transform.position;
+        particleCloud.SetActive(false);
+        particleCloud.SetActive(true);
     }
 
     public void TriggerJumpscare() {
@@ -126,6 +143,7 @@ public class MannequinManager : MonoBehaviour
 
     public void NoLongerSitting() {
         delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
+        ParticleAppear(mannequinSitting);
         AudioSource.PlayClipAtPoint(poofOut, mannequinSitting.transform.position, 0.1f);
         couch.transform.tag = "Untagged";
         isSitting = false;
@@ -142,6 +160,7 @@ public class MannequinManager : MonoBehaviour
 
     public void CarFinished() {
         delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
+        ParticleAppear(mannequinPoint);
         AudioSource.PlayClipAtPoint(poofOut, mannequinPoint.transform.position, 0.1f);
         mannequinPoint.SetActive(false);
         if (isAngry) {
@@ -157,6 +176,7 @@ public class MannequinManager : MonoBehaviour
     public void TurnedOnArcade() {
         currentTime = 0;
         waitingOnArcade = true;
+        ParticleAppear(mannequinWantToPlay);
         AudioSource.PlayClipAtPoint(poofOut, mannequinWantToPlay.transform.position, 0.1f);
         mannequinWantToPlay.SetActive(false);
     }
@@ -164,6 +184,7 @@ public class MannequinManager : MonoBehaviour
     public void DemandTurnArcadeOff() {
         currentTime = 0;
         waitingOnArcade = false;
+        ParticleAppear(mannequinWantArcadeOff);
         AudioSource.PlayClipAtPoint(poofIn, mannequinWantArcadeOff.transform.position, 0.1f);
         mannequinWantArcadeOff.SetActive(true);
     }
@@ -171,6 +192,7 @@ public class MannequinManager : MonoBehaviour
     public void DoneWithArcade() {
         delayBeforeLeaving = Random.Range(delayBeforeLeavingMin, delayBeforeLeavingMax);
         arcade.transform.tag = "Untagged";
+        ParticleAppear(mannequinWantArcadeOff);
         AudioSource.PlayClipAtPoint(poofOut, mannequinWantArcadeOff.transform.position, 0.1f);
         mannequinWantArcadeOff.SetActive(false);
         if (isAngry) {
@@ -193,6 +215,7 @@ public class MannequinManager : MonoBehaviour
             TriggerJumpscare();
         }
         arcade.transform.tag = "Untagged";
+        ParticleAppear(mannequinWantToPlay);
         AudioSource.PlayClipAtPoint(poofOut, mannequinWantToPlay.transform.position, 0.1f);
         mannequinWantToPlay.SetActive(false);
         isActive = false;

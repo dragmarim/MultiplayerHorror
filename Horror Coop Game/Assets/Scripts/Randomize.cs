@@ -45,35 +45,40 @@ public class Randomize : MonoBehaviour
     public int buttonId;
     public GameObject button;
 
+    public bool victory = false;
+    public GameObject door;
+
     void Start() {
         StartCoroutine(StartButtonCooldown());
     }
 
     void Update() {
-        if (playerOrder.Count > 0 && playerOrder[currentRune] == localPlayer) {
-            counter += Time.deltaTime;
-            if (lightStage == 0) {
-                Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
-                tmp.a += 0.01f;
-                runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
-                if (counter >= timeToTurnOn) {
-                    counter = 0;
-                    lightStage = 1;
-                }
-            } else if (lightStage == 1) {
-                Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
-                tmp.a -= 0.01f;
-                if (tmp.a >= 0.117f) {
+        if (playerOrder.Count > 0) {
+            if (playerOrder[currentRune] == localPlayer && !victory) {
+                counter += Time.deltaTime;
+                if (lightStage == 0) {
+                    Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+                    tmp.a += 0.01f;
                     runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
-                }
-                if (counter >= timeToTurnOn) {
-                    counter = 0;
-                    lightStage = 2;
-                }
-            } else {
-                if (counter >= timeToStayOff) {
-                    counter = 0;
-                    lightStage = 0;
+                    if (counter >= timeToTurnOn) {
+                        counter = 0;
+                        lightStage = 1;
+                    }
+                } else if (lightStage == 1) {
+                    Color tmp = runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color;
+                    tmp.a -= 0.01f;
+                    if (tmp.a >= 0.117f) {
+                        runes[runeOrder[currentRune]].GetComponent<SpriteRenderer>().color = tmp;
+                    }
+                    if (counter >= timeToTurnOn) {
+                        counter = 0;
+                        lightStage = 2;
+                    }
+                } else {
+                    if (counter >= timeToStayOff) {
+                        counter = 0;
+                        lightStage = 0;
+                    }
                 }
             }
         }
@@ -202,6 +207,10 @@ public class Randomize : MonoBehaviour
             lightStage = 0;
             counter = 0;
             currentRune += 1;
+            if (currentRune == 8) {
+                victory = true;
+                door.transform.tag = "Rune";
+            }
             button.GetComponent<ButtonPress>().SuccessfulPress();
             StartCoroutine(ShortButtonCooldown());
         } else {
